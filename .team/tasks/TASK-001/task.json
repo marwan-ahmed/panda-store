@@ -1,0 +1,104 @@
+{
+  "id": "TASK-001",
+  "title": "كتالوج منتجات باندا ستور وتفاصيلها",
+  "kind": "change",
+  "path": "full",
+  "source": null,
+  "branch": "sat/TASK-001",
+  "base_ref": "main",
+  "base_sha": "aed68934fdf900324f19248809881a2fa89016d0",
+  "created_at": "2026-11-26T15:31:29.179Z",
+  "phase": "TESTS",
+  "interpret_round": 2,
+  "fix_cycles": 0,
+  "verify_failures": 0,
+  "frozen_sha": null,
+  "cr": null,
+  "gates": {
+    "GATE_0": [
+      {
+        "decision": "approve",
+        "note": "Q1: (أ) — يظهر الكتالوج في الصفحة الرئيسية مباشرة بدل عبارة «المتجر قيد البناء». A1: مؤكد — لكل منتج سعر واحد ثابت، عدد صحيح موجب بالدينار العراقي، بلا خصومات ولا أسعار سابقة ولا ضرائب ولا رسوم توصيل.",
+        "at": "2026-11-26T16:49:04.627Z",
+        "mode": "agent"
+      }
+    ],
+    "GATE_1": [
+      {
+        "decision": "approve",
+        "note": "اعتمد الخطة",
+        "at": "2026-11-26T18:46:35.306Z",
+        "mode": "agent"
+      }
+    ],
+    "GATE_START": [
+      {
+        "decision": "approve",
+        "note": "ابدأ التنفيذ",
+        "at": "2026-11-26T18:47:36.328Z",
+        "mode": "agent"
+      }
+    ]
+  },
+  "granted": {},
+  "last_verify": null,
+  "report_hash": null,
+  "history": [
+    {
+      "phase": "INTAKE",
+      "at": "2026-11-26T15:31:29.180Z"
+    },
+    {
+      "phase": "INTERPRET",
+      "at": "2026-11-26T15:31:50.350Z",
+      "from": "INTAKE"
+    },
+    {
+      "phase": "GATE_0",
+      "at": "2026-11-26T15:36:42.887Z",
+      "from": "INTERPRET",
+      "blocking_questions": 1,
+      "sensitive_assumptions": 1
+    },
+    {
+      "phase": "INTERPRET",
+      "at": "2026-11-26T16:49:04.629Z",
+      "from": "GATE_0",
+      "gate": "GATE_0",
+      "note": "Q1: (أ) — يظهر الكتالوج في الصفحة الرئيسية مباشرة بدل عبارة «المتجر قيد البناء». A1: مؤكد — لكل منتج سعر واحد ثابت، عدد صحيح موجب بالدينار العراقي، بلا خصومات ولا أسعار سابقة ولا ضرائب ولا رسوم توصيل."
+    },
+    {
+      "phase": "DESIGN",
+      "at": "2026-11-26T16:51:56.516Z",
+      "from": "INTERPRET"
+    },
+    {
+      "phase": "THREAT",
+      "at": "2026-11-26T16:58:12.057Z",
+      "from": "DESIGN"
+    },
+    {
+      "phase": "GATE_1",
+      "at": "2026-11-26T17:02:24.890Z",
+      "from": "THREAT"
+    },
+    {
+      "phase": "GATE_START",
+      "at": "2026-11-26T18:46:35.308Z",
+      "from": "GATE_1",
+      "gate": "GATE_1",
+      "note": "اعتمد الخطة"
+    },
+    {
+      "phase": "TESTS",
+      "at": "2026-11-26T18:47:36.330Z",
+      "from": "GATE_START",
+      "gate": "GATE_START",
+      "note": "ابدأ التنفيذ"
+    }
+  ],
+  "started": {
+    "at": "2026-11-26T18:47:36.330Z",
+    "note": "ابدأ التنفيذ"
+  }
+}
