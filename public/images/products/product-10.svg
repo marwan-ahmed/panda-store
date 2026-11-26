@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-label="رسم توضيحي لقميص قطني بطبعة باندا">
+  <title>قميص قطني بطبعة باندا</title>
+  <rect width="400" height="300" rx="24" fill="#F1F5F9" />
+  <circle cx="200" cy="152" r="102" fill="#E2E8F0" />
+  <path d="M148 56l-58 26 22 46 30-14v136h116V114l30 14 22-46-58-26c-12 18-32 24-52 24s-40-6-52-24z" fill="#FFFFFF" stroke="#1F2937" stroke-width="6" stroke-linejoin="round" />
+  <path d="M168 58c8 14 20 20 32 20s24-6 32-20" fill="none" stroke="#2D6A4F" stroke-width="6" stroke-linecap="round" />
+  <circle cx="174" cy="134" r="11" fill="#1F2937" />
+  <circle cx="226" cy="134" r="11" fill="#1F2937" />
+  <circle cx="200" cy="156" r="32" fill="#FFFFFF" stroke="#1F2937" stroke-width="4.5" />
+  <ellipse cx="188" cy="152" rx="7.5" ry="10" fill="#1F2937" />
+  <ellipse cx="212" cy="152" rx="7.5" ry="10" fill="#1F2937" />
+  <circle cx="189" cy="150" r="2.2" fill="#FFFFFF" />
+  <circle cx="211" cy="150" r="2.2" fill="#FFFFFF" />
+  <ellipse cx="200" cy="164" rx="5" ry="3.5" fill="#1F2937" />
+  <path d="M192 172c3 4 13 4 16 0" fill="none" stroke="#1F2937" stroke-width="3" stroke-linecap="round" />
+  <rect x="176" y="200" width="48" height="8" rx="4" fill="#2D6A4F" />
+</svg>

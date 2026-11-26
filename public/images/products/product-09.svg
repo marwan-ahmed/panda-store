@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-label="رسم توضيحي لمجموعة أقلام وملصقات باندا">
+  <title>مجموعة أقلام وملصقات باندا</title>
+  <rect width="400" height="300" rx="24" fill="#FFFBEB" />
+  <circle cx="200" cy="150" r="104" fill="#FEF3C7" />
+  <rect x="196" y="76" width="112" height="148" rx="14" fill="#FFFFFF" stroke="#1F2937" stroke-width="5" />
+  <circle cx="252" cy="126" r="24" fill="#FFFFFF" stroke="#1F2937" stroke-width="4" />
+  <circle cx="234" cy="108" r="8" fill="#1F2937" />
+  <circle cx="270" cy="108" r="8" fill="#1F2937" />
+  <circle cx="244" cy="124" r="4" fill="#1F2937" />
+  <circle cx="260" cy="124" r="4" fill="#1F2937" />
+  <ellipse cx="252" cy="134" rx="4" ry="3" fill="#1F2937" />
+  <rect x="218" y="168" width="68" height="20" rx="10" fill="#2D6A4F" />
+  <rect x="218" y="198" width="68" height="12" rx="6" fill="#A7F3D0" />
+  <g transform="rotate(-12 126 160)">
+    <rect x="108" y="70" width="22" height="150" rx="6" fill="#2D6A4F" stroke="#1F2937" stroke-width="4" />
+    <polygon points="108,220 130,220 119,246" fill="#FDE68A" stroke="#1F2937" stroke-width="4" stroke-linejoin="round" />
+    <circle cx="119" cy="64" r="14" fill="#FFFFFF" stroke="#1F2937" stroke-width="4" />
+    <circle cx="108" cy="52" r="5" fill="#1F2937" />
+    <circle cx="130" cy="52" r="5" fill="#1F2937" />
+  </g>
+  <g transform="rotate(8 164 164)">
+    <rect x="150" y="76" width="22" height="146" rx="6" fill="#1F2937" stroke="#1F2937" stroke-width="4" />
+    <polygon points="150,222 172,222 161,246" fill="#FFFFFF" stroke="#1F2937" stroke-width="4" stroke-linejoin="round" />
+    <circle cx="161" cy="70" r="12" fill="#A7F3D0" stroke="#1F2937" stroke-width="4" />
+  </g>
+</svg>
