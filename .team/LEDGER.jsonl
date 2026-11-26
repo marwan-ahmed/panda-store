@@ -8,3 +8,6 @@
 {"ts":"2026-11-26T17:02:24.893Z","type":"phase","task":"TASK-001","from":"THREAT","to":"GATE_1"}
 {"ts":"2026-11-26T18:46:35.310Z","type":"phase","task":"TASK-001","from":"GATE_1","to":"GATE_START","gate":"GATE_1","note":"اعتمد الخطة"}
 {"ts":"2026-11-26T18:47:36.331Z","type":"phase","task":"TASK-001","from":"GATE_START","to":"TESTS","gate":"GATE_START","note":"ابدأ التنفيذ"}
+{"ts":"2026-11-26T18:54:06.220Z","type":"phase","task":"TASK-001","from":"TESTS","to":"IMPLEMENT","frozen_sha":"1a0e0e1e669dbddfe58dca1ed1bf883f3214f99d"}
+{"ts":"2026-11-26T18:57:09.512Z","type":"phase","task":"TASK-001","from":"IMPLEMENT","to":"DESIGN","reason":"CHANGE_REQUEST-1","change_request":"CHANGE_REQUEST-1.md"}
+{"ts":"2026-11-26T19:01:06.628Z","type":"phase","task":"TASK-001","from":"DESIGN","to":"TESTS","cr_classification":"clarification"}

@@ -34,7 +34,7 @@ No database or ORM is used in this task (`EXEC_PROMPT.md` §5). All catalog reco
 | `/` (`src/app/page.tsx`) | `GET` (sync Server Component, prerendered static shell) | `public` (none) | No params | `200 OK` HTML/RSC with `<h1>باندا ستور</h1>` and 10 `<ProductCard />` items | Build/runtime fail only if static catalog invariant breaks |
 | `/products` (`src/proxy.ts` + `src/app/products/page.tsx`) | `GET` (Proxy rewrite + fallback Page) | `public` (none) | Missing `[id]` segment | `404 Not Found` Arabic `<NotFoundView />` with link to `/` | Always `404`; never `500` |
 | `/products/[id]` (`src/proxy.ts` + `src/app/products/[id]/page.tsx`) | `GET` (async Server Component, `generateStaticParams` for `"1"`–`"10"`) | `public` (none) | `params: Promise<{ id: string }>` | `200 OK` statically prerendered details page (`<ProductDetails />`) for `"1"`–`"10"` | Unknown/invalid/malformed `id` rewritten by `src/proxy.ts` with HTTP `404` to `/__not-found` (`src/app/not-found.tsx`); `notFound()` in `ProductPage` / `generateMetadata` as defense-in-depth |
-| `/images/products/product-01.svg` … `product-10.svg` | `GET` (static `public/` files) | `public` (none) | Static asset path | `200 OK` `image/svg+xml` static vector asset | `404` for unknown filenames |
+| `/images/products/product-01.svg` … `product-10.svg` | `GET` (static `public/` files) | `public` (none) | Static asset path | `200 OK` `image/svg+xml` standalone static vector asset (root `<svg xmlns="http://www.w3.org/2000/svg">`) | `404` for unknown filenames |
 
 ### Domain & UI module contracts
 - **`src/lib/products.ts`**:
@@ -78,7 +78,7 @@ No database or ORM is used in this task (`EXEC_PROMPT.md` §5). All catalog reco
 Security notes for threat modeling:
 - **Zero mutation, auth, DB, or payment surface:** No `app/api/**` route handlers, no `"use server"` Server Actions, no `cookies()`/`headers()`/`searchParams` reads, no database connection, and no payment keys/forms exist.
 - **Untrusted input boundaries:** Only URL path segment `id` on `/products/:path*` is user-controlled. It is safely decoded inside `try/catch` (handling malformed `%` sequences), checked by strict equality via `Array.prototype.find` (preventing prototype-key lookup and path traversal), and **never reflected** into rendered HTML, error text, or logs (`NotFoundView` uses fixed static Arabic copy).
-- **SVG safety:** All 10 local SVGs are static geometric graphics without `<script>`, `on*` event attributes, `<foreignObject>`, or external references; `next/image` uses `unoptimized` so `dangerouslyAllowSVG` remains `false` in `next.config.ts`.
+- **SVG safety:** All 10 local SVGs are standalone `image/svg+xml` geometric graphics whose root `<svg>` element declares the standard W3C SVG XML namespace (`xmlns="http://www.w3.org/2000/svg"`, required by browsers to render standalone `.svg` files via `<img src="/images/products/...">` rather than un-namespaced XML) and contain zero `<script>`, `on*` event attributes, `<foreignObject>`, `javascript:` URIs, or external `http://`/`https://` references (`href`, `xlink:href`, `src`, or CSS `url(...)`); `next/image` uses `unoptimized` so `dangerouslyAllowSVG` remains `false` in `next.config.ts`.
 
 ## 6. Files expected to change
 - `public/images/products/product-01.svg` … `public/images/products/product-10.svg` — 10 lightweight synthetic vector product illustrations.

@@ -85,11 +85,16 @@ describe("فحوصات الأمن والحدود والأصول والتكوين
       expect(byteSize).toBeGreaterThan(0);
       expect(byteSize).toBeLessThan(50 * 1024);
       expect(svgContent).toMatch(/<svg[\s>]/i);
+      expect(svgContent).toMatch(/<svg\b[^>]*\bxmlns=(["'])http:\/\/www\.w3\.org\/2000\/svg\1/i);
       expect(svgContent).not.toMatch(/<script\b/i);
       expect(svgContent).not.toMatch(/\son[a-z]+\s*=/i);
       expect(svgContent).not.toMatch(/<foreignObject\b/i);
       expect(svgContent).not.toMatch(/javascript:/i);
-      expect(svgContent).not.toMatch(/https?:\/\//i);
+      const svgWithoutRootNs = svgContent.replace(
+        /(<svg\b[^>]*?)\s+xmlns=(["'])http:\/\/www\.w3\.org\/2000\/svg\2/i,
+        "$1"
+      );
+      expect(svgWithoutRootNs).not.toMatch(/https?:\/\//i);
     }
   });
 
