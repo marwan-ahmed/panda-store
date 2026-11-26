@@ -1,0 +1,25 @@
+{
+  "task_id": "TASK-001",
+  "base_sha": "aed68934fdf900324f19248809881a2fa89016d0",
+  "head_sha": "742f2e12b436ff0f4d42d253c1c0b08632c09e1f",
+  "verdict": "CLEAR_WITHIN_SCOPE",
+  "test_integrity": {
+    "frozen_sha": "86117033fc292c5f24f2e09134af3fa14ffde893",
+    "tests_modified": false,
+    "skipped_tests": 0
+  },
+  "findings": [
+    {
+      "id": "REV-01",
+      "lens": "logic",
+      "severity": "medium",
+      "proof": "confirmed",
+      "location": "src/proxy.ts#proxy",
+      "scenario": "تنص المواصفات (EC-4) والمعمارية على أن المسار /products/ يعيد HTTP 404 مباشرةً عبر src/proxy.ts#proxy؛ غير أن اختبار خادم الإنتاج الفعلي (Next.js 16.4.6 عبر next start مع الإعداد الافتراضي skipTrailingSlashRedirect: false) يكشف أن موجه Next.js يلتقط الشرطة المائلة الختامية قبل وصول الطلب إلى proxy.ts، فيرد على GET /products/ برمز 308 Permanent Redirect نحو Location: /products (وليس 404 مباشرةً)، وكذلك يرد على GET /products/3/ برمز 308 نحو /products/3. وعند عدم اتباع التحويلات (مثل redirect: \"manual\") لا يرى العميل رمز 404 من الاستجابة الأولى، بينما مرّ اختبار EC-4 في tests/product-routes.test.tsx لأنه يستدعي proxy() مباشرةً في Vitest متجاوزاً طبقة التوجيه هذه.",
+      "evidence": ".team/tasks/TASK-001/review/probe-server.mjs & .team/tasks/TASK-001/review/probe-server.log: {\"reqPath\":\"/products/\",\"status\":308,\"location\":\"/products\",\"bodyLen\":9} و {\"reqPath\":\"/products/3/\",\"status\":308,\"location\":\"/products/3\",\"bodyLen\":11} مقابل {\"reqPath\":\"/products\",\"status\":404,\"hasNotFoundText\":true} عند التشغيل الفعلي على Next.js 16.4.6 (next start).",
+      "fix": "يعتمد السلوك على طبقة التوجيه في Next.js 16.4.6 حيث يسبق توحيد الشرطة المائلة الافتراضي (skipTrailingSlashRedirect: false) تنفيذ src/proxy.ts#proxy: إما توثيق قبول تسلسل 308 -> /products -> 404 في EC-4 وARCH.md (إذ تصل المتصفحات والعملاء المتبعون للتحويل إلى صفحة 404 العربية بنجاح)، أو تفعيل skipTrailingSlashRedirect: true في next.config.ts شريطة تعديل src/proxy.ts#proxy أيضاً لإعادة توجيه المسارات الصالحة المنتهية بشرطة مائلة (مثل /products/3/) إلى /products/3 بدلاً من إسقاطها إلى 404.",
+      "plain": "عند طلب رابط المنتجات ومعه شرطة مائلة في نهايته، يوجّه الخادم الطلب أولاً إلى الرابط نفسه بدون شرطة مائلة ثم يعرض صفحة «المنتج غير موجود» بدلاً من عرضها من الخطوة الأولى.",
+      "trace": ["EC-4", "AC-7"]
+    }
+  ]
+}

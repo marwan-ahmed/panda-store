@@ -8,11 +8,11 @@
   "base_ref": "main",
   "base_sha": "aed68934fdf900324f19248809881a2fa89016d0",
   "created_at": "2026-11-26T15:31:29.179Z",
-  "phase": "TESTS",
+  "phase": "GATE_2",
   "interpret_round": 2,
   "fix_cycles": 0,
   "verify_failures": 0,
-  "frozen_sha": "1a0e0e1e669dbddfe58dca1ed1bf883f3214f99d",
+  "frozen_sha": "86117033fc292c5f24f2e09134af3fa14ffde893",
   "cr": null,
   "gates": {
     "GATE_0": [
@@ -40,9 +40,17 @@
       }
     ]
   },
-  "granted": {},
-  "last_verify": null,
-  "report_hash": null,
+  "granted": {
+    "fix_cycles": 0
+  },
+  "last_verify": {
+    "sha": "742f2e12b436ff0f4d42d253c1c0b08632c09e1f",
+    "dirty": false,
+    "result": "pass",
+    "dir": ".team/tasks/TASK-001/evidence/20261126-192242-742f2e1",
+    "at": "2026-11-26T19:23:30.184Z"
+  },
+  "report_hash": "83ea4f58e3cb7448d1aac9178ea24ea5cefddce9dd5bdbaa8cf0563cdb080ae3",
   "history": [
     {
       "phase": "INTAKE",
@@ -114,10 +122,52 @@
       "at": "2026-11-26T19:01:06.625Z",
       "from": "DESIGN",
       "cr_classification": "clarification"
+    },
+    {
+      "phase": "IMPLEMENT",
+      "at": "2026-11-26T19:02:29.430Z",
+      "from": "TESTS",
+      "frozen_sha": "86117033fc292c5f24f2e09134af3fa14ffde893"
+    },
+    {
+      "phase": "ESCALATED",
+      "at": "2026-11-26T19:19:24.382Z",
+      "from": "IMPLEMENT",
+      "reason": "verify_failures limit"
+    },
+    {
+      "phase": "IMPLEMENT",
+      "at": "2026-11-26T19:22:29.408Z",
+      "from": "ESCALATED",
+      "note": "الخيار 1",
+      "resumed_from": "IMPLEMENT"
+    },
+    {
+      "phase": "REVIEW",
+      "at": "2026-11-26T19:23:54.997Z",
+      "from": "IMPLEMENT",
+      "verified_sha": "742f2e12b436ff0f4d42d253c1c0b08632c09e1f"
+    },
+    {
+      "phase": "REPORT",
+      "at": "2026-11-26T19:33:00.804Z",
+      "from": "REVIEW"
+    },
+    {
+      "phase": "GATE_2",
+      "at": "2026-11-26T19:33:52.152Z",
+      "from": "REPORT",
+      "acceptance_needed": [
+        "REV-01"
+      ]
     }
   ],
   "started": {
     "at": "2026-11-26T18:47:36.330Z",
     "note": "ابدأ التنفيذ"
-  }
+  },
+  "escalated_from": "IMPLEMENT",
+  "acceptance_needed": [
+    "REV-01"
+  ]
 }

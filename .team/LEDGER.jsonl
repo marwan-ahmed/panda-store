@@ -11,3 +11,13 @@
 {"ts":"2026-11-26T18:54:06.220Z","type":"phase","task":"TASK-001","from":"TESTS","to":"IMPLEMENT","frozen_sha":"1a0e0e1e669dbddfe58dca1ed1bf883f3214f99d"}
 {"ts":"2026-11-26T18:57:09.512Z","type":"phase","task":"TASK-001","from":"IMPLEMENT","to":"DESIGN","reason":"CHANGE_REQUEST-1","change_request":"CHANGE_REQUEST-1.md"}
 {"ts":"2026-11-26T19:01:06.628Z","type":"phase","task":"TASK-001","from":"DESIGN","to":"TESTS","cr_classification":"clarification"}
+{"ts":"2026-11-26T19:02:29.432Z","type":"phase","task":"TASK-001","from":"TESTS","to":"IMPLEMENT","frozen_sha":"86117033fc292c5f24f2e09134af3fa14ffde893"}
+{"ts":"2026-11-26T19:17:01.212Z","type":"verify","task":"TASK-001","phase":"IMPLEMENT","sha":"742f2e12b436ff0f4d42d253c1c0b08632c09e1f","result":"fail","dir":".team/tasks/TASK-001/evidence/20261126-191647-742f2e1"}
+{"ts":"2026-11-26T19:19:24.381Z","type":"verify","task":"TASK-001","phase":"IMPLEMENT","sha":"742f2e12b436ff0f4d42d253c1c0b08632c09e1f","result":"fail","dir":".team/tasks/TASK-001/evidence/20261126-191911-742f2e1"}
+{"ts":"2026-11-26T19:19:24.383Z","type":"phase","task":"TASK-001","from":"IMPLEMENT","to":"ESCALATED","reason":"verify_failures limit"}
+{"ts":"2026-11-26T19:22:29.411Z","type":"phase","task":"TASK-001","from":"ESCALATED","to":"IMPLEMENT","note":"الخيار 1","resumed_from":"IMPLEMENT"}
+{"ts":"2026-11-26T19:23:30.185Z","type":"verify","task":"TASK-001","phase":"IMPLEMENT","sha":"742f2e12b436ff0f4d42d253c1c0b08632c09e1f","result":"pass","dir":".team/tasks/TASK-001/evidence/20261126-192242-742f2e1"}
+{"ts":"2026-11-26T19:23:54.999Z","type":"phase","task":"TASK-001","from":"IMPLEMENT","to":"REVIEW","verified_sha":"742f2e12b436ff0f4d42d253c1c0b08632c09e1f"}
+{"ts":"2026-11-26T19:33:00.807Z","type":"phase","task":"TASK-001","from":"REVIEW","to":"REPORT"}
+{"ts":"2026-11-26T19:33:12.779Z","type":"report","task":"TASK-001","sha":"742f2e12b436ff0f4d42d253c1c0b08632c09e1f"}
+{"ts":"2026-11-26T19:33:52.154Z","type":"phase","task":"TASK-001","from":"REPORT","to":"GATE_2","acceptance_needed":["REV-01"]}
