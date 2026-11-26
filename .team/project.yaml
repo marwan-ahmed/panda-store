@@ -1,0 +1,69 @@
+# Marwan SAT — إعدادات المشروع (ملك المشروع: لا يغيّره sat update أبداً)
+# المرجع: .team/CHARTER.md §13 · المخطط: .team/schemas/project.schema.json
+# الصيغة: مجموعة جزئية من YAML (بلا | ولا > ولا anchors).
+sat_version: "0.5.0"
+
+project:
+  name: "panda-store"
+  stack: nextjs
+  platform: antigravity
+
+git:
+  base_branch: main
+  task_branch_prefix: sat/
+  branch_protection: required  # required | accepted_risk — الدمج بيدك وحدك (الميثاق §14.2). لا تغيّرها إلا بقرار موثّق
+
+commands:
+  install: npm ci
+  typecheck: npm run typecheck  # next typegen أولاً: Next.js 16 يولّد أنواع المسارات، فبدونه يفشل الفحص على نسخة جديدة
+  lint: npx eslint .
+  build: npm run build
+  test: npm run test
+  start: npm run start
+  extra: []
+
+paths:
+  tests: ["tests/**", "__tests__/**", "e2e/**", "**/*.test.*", "**/*.spec.*"]
+  sensitive_extra: []
+
+security:
+  profile: web
+  attack_env: none            # neon-branch | docker-postgres | none — اضبطه ثم شغّل sat doctor
+  env_up: null                # أمر إنشاء بيئة الهجوم المؤقتة (فرع Neon بالمخطط فقط، أو حاوية Postgres)
+  env_down: null              # أمر إزالتها
+  seed: .team/seed/           # بيانات اصطناعية فقط
+  constitution: null          # مسار دستور الأمن الخاص بالمشروع إن وُجد
+  require_scanners: false     # في CI تُعدّ الماسحات إلزامية دائماً
+  scan_scope: diff            # diff: تحكم الماسحات على تغيير المهمة وحده مقارنةً بالفرع الأساسي، والدين المسبق يُذكر ولا يُفشل · full: فحص المستودع كله
+  scanners:
+    secrets: gitleaks git --no-banner --redact --exit-code 1
+    sast: semgrep scan --config p/default --error --metrics=off --quiet
+    dependencies: npm audit --audit-level=high
+
+owner:
+  audience: simple       # simple: صاحب الطلب لا يبرمج، فيخاطبه الفريق بلغة مبسطة · developer: صاحب الطلب مطوّر
+
+gates:
+  approval: agent             # agent: يسجّل المدير التقني موافقتك الصريحة · owner: تشغّل أمر الموافقة بنفسك
+  phrases:                    # الردود الحرفية التي تعتمد البوابات، وتتحقق منها الأداة (الميثاق §6.2)
+    plan: "اعتمد الخطة"
+    start: "ابدأ التنفيذ"
+    result: "اعتمد النتيجة"
+    backlog: "اعتمد القائمة"
+    update: "نفّذ التحديث"       # يعتمد تحديث الفريق نفسه (sat update --approve)، لا بوابة مهمة
+
+guard:
+  no_task_policy: ask         # ask | allow | deny — الكتابة دون مهمة SAT نشطة
+
+limits:
+  question_rounds: 2
+  verify_failures: 2
+  fix_cycles: 2
+  max_credits_per_task: null
+
+audit:                        # مهام التدقيق (الميثاق §5.5 و§7.8): حدود حجم البند في قائمة المهام
+  max_findings_per_task: 3
+  max_files_per_task: 8
+
+timeouts:
+  step_minutes: 20

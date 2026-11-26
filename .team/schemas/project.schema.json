@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "marwan-sat/project.schema.json",
+  "title": "Marwan SAT — .team/project.yaml",
+  "description": "Written in the YAML subset that SAT parses without dependencies: block maps, block lists, inline lists, no anchors, no block scalars.",
+  "type": "object",
+  "required": ["sat_version", "project", "commands", "paths", "security"],
+  "properties": {
+    "sat_version": { "type": "string" },
+    "project": {
+      "type": "object",
+      "required": ["name", "stack", "platform"],
+      "properties": {
+        "name": { "type": "string" },
+        "stack": { "enum": ["nextjs", "laravel", "flutter", "react-native", "custom"] },
+        "platform": { "enum": ["antigravity", "claude-code"] }
+      }
+    },
+    "git": {
+      "type": "object",
+      "properties": {
+        "base_branch": { "type": "string" },
+        "task_branch_prefix": { "type": "string" },
+        "branch_protection": { "enum": ["required", "accepted_risk"], "description": "required: sat doctor is NOT READY until it can verify branch protection on base_branch (charter §14.2). accepted_risk: the owner accepts merging without it." }
+      }
+    },
+    "commands": {
+      "type": "object",
+      "properties": {
+        "install": { "type": ["string", "null"] },
+        "typecheck": { "type": ["string", "null"] },
+        "lint": { "type": ["string", "null"] },
+        "build": { "type": ["string", "null"] },
+        "test": { "type": ["string", "null"] },
+        "start": { "type": ["string", "null"] },
+        "extra": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "paths": {
+      "type": "object",
+      "required": ["tests"],
+      "properties": {
+        "tests": { "type": "array", "minItems": 1, "items": { "type": "string" } },
+        "sensitive_extra": { "type": "array", "items": { "type": "string" } }
+      }
+    },
+    "security": {
+      "type": "object",
+      "properties": {
+        "profile": { "enum": ["web", "mobile"] },
+        "attack_env": { "enum": ["neon-branch", "docker-postgres", "docker-mysql", "none"] },
+        "env_up": { "type": ["string", "null"] },
+        "env_down": { "type": ["string", "null"] },
+        "seed": { "type": ["string", "null"] },
+        "constitution": { "type": ["string", "null"] },
+        "require_scanners": { "type": "boolean" },
+        "scan_scope": {
+          "enum": ["diff", "full"],
+          "description": "diff (default): scanners judge only the change against the base commit; pre-existing dependency debt is reported, not blocking. full: whole-repository scans."
+        },
+        "scanners": {
+          "type": "object",
+          "properties": {
+            "secrets": { "type": ["string", "null"] },
+            "sast": { "type": ["string", "null"] },
+            "dependencies": { "type": ["string", "null"] }
+          }
+        }
+      }
+    },
+    "gates": { "type": "object", "properties": { "phrases": {
+          "type": "object",
+          "description": "The exact replies that approve a gate; the tool records an approval only when the owner's reply matches (charter §6.2). They must differ from each other.",
+          "properties": {
+            "plan": { "type": "string", "default": "اعتمد الخطة" },
+            "start": { "type": "string", "default": "ابدأ التنفيذ" },
+            "result": { "type": "string", "default": "اعتمد النتيجة" },
+            "backlog": { "type": "string", "default": "اعتمد القائمة" }
+          }
+        },
+        "approval": { "enum": ["agent", "owner"] } } },
+    "guard": { "type": "object", "properties": { "no_task_policy": { "enum": ["ask", "allow", "deny"] } } },
+    "owner": {
+      "type": "object",
+      "description": "Who the team talks to (charter §6.1). simple: the owner does not program — plain Arabic, technical detail at the end. developer: technical vocabulary.",
+      "properties": { "audience": { "enum": ["simple", "developer"], "default": "simple" } }
+    },
+    "audit": {
+      "type": "object",
+      "description": "Audit tasks (charter §5.5, §7.8): the size limits of one backlog item.",
+      "properties": {
+        "max_findings_per_task": { "type": "integer", "minimum": 1, "default": 3 },
+        "max_files_per_task": { "type": "integer", "minimum": 1, "default": 8 }
+      }
+    },
+    "limits": {
+      "type": "object",
+      "properties": {
+        "question_rounds": { "type": "integer", "minimum": 1 },
+        "verify_failures": { "type": "integer", "minimum": 1 },
+        "fix_cycles": { "type": "integer", "minimum": 1 },
+        "max_credits_per_task": { "type": ["number", "null"] }
+      }
+    },
+    "timeouts": { "type": "object", "properties": { "step_minutes": { "type": "integer", "minimum": 1 } } }
+  }
+}

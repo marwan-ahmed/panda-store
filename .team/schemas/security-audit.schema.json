@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "marwan-sat/security-audit.schema.json",
+  "title": "Marwan SAT — SECURITY_AUDIT.json (security auditor)",
+  "type": "object",
+  "required": ["task_id", "profile", "verdict", "coverage", "findings"],
+  "properties": {
+    "task_id": { "type": "string" },
+    "profile": { "enum": ["web", "mobile"] },
+    "verdict": { "enum": ["BLOCKED", "INCOMPLETE", "CLEAR_WITHIN_SCOPE"] },
+    "summary": { "type": "string", "description": "Never conclude 'safe', 'secure' or «آمن»." },
+    "environment": {
+      "type": "object",
+      "properties": {
+        "target": { "type": "string" },
+        "attack_env": { "enum": ["neon-branch", "docker-postgres", "docker-mysql", "none"] },
+        "head_sha": { "type": "string" }
+      }
+    },
+    "scanners_source": { "type": "string" },
+    "coverage": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["axis", "status"],
+        "properties": {
+          "axis": { "type": "string" },
+          "status": { "enum": ["TESTED_DYNAMIC", "REVIEWED_STATIC", "NOT_TESTED", "NOT_APPLICABLE"] },
+          "reason": { "type": "string" },
+          "abuse_cases": { "type": "array", "items": { "type": "string" } }
+        },
+        "allOf": [
+          {
+            "if": { "properties": { "status": { "enum": ["NOT_TESTED", "NOT_APPLICABLE"] } } },
+            "then": { "required": ["reason"] }
+          }
+        ]
+      }
+    },
+    "scanner_triage": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["tool", "classification", "reason"],
+        "properties": {
+          "tool": { "type": "string" },
+          "rule": { "type": "string" },
+          "location": { "type": "string" },
+          "classification": { "enum": ["confirmed", "false_positive"] },
+          "reason": { "type": "string" }
+        }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "axis", "severity", "proof", "location", "fix"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^SEC-\\d+$" },
+          "axis": { "type": "string" },
+          "severity": { "enum": ["critical", "high", "medium", "low"] },
+          "proof": { "enum": ["confirmed", "suspected"] },
+          "location": { "type": "string" },
+          "exploit": {
+            "type": "object",
+            "properties": { "request": { "type": "string" }, "response": { "type": "string" } }
+          },
+          "evidence": { "type": "string" },
+          "scenario": { "type": "string" },
+          "fix": { "type": "string" },
+          "plain": { "type": "string", "description": "One sentence for the owner, without jargon (required for critical/high/medium when owner.audience is simple)" },
+          "reference": { "type": "string" }
+        }
+      }
+    }
+  }
+}

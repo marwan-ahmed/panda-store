@@ -1,0 +1,19 @@
+{
+  "task_id": "TASK-001",
+  "environment": [
+    { "id": "ENV-1", "topic": "runtime", "fact": "Next.js 16.x App Router; server code on the Node.js runtime (no `export const runtime = 'edge'`)", "evidence": "package.json#dependencies.next; grep of runtime exports: none" },
+    { "id": "ENV-2", "topic": "hosting", "fact": "<where it runs, e.g. Vercel with Fluid compute>", "evidence": "<file#key or command + output>" },
+    { "id": "ENV-3", "topic": "database", "fact": "<engine and provider>", "evidence": "<file#symbol>" },
+    { "id": "ENV-4", "topic": "db_driver", "fact": "<driver: e.g. neon-http (no interactive transactions) or Pool over WebSocket>", "evidence": "<file#symbol>" },
+    { "id": "ENV-5", "topic": "auth", "fact": "<how a session is established and checked on the server>", "evidence": "<file#symbol>" },
+    { "id": "ENV-6", "topic": "payments", "fact": "<provider, callback route, verification>", "status": "unknown", "question": "<the question that would settle it, when it cannot be read from the code>" }
+  ],
+  "entry_points": [
+    { "id": "EP-1", "kind": "route", "path": "GET /courses", "exposure": "public", "auth_check": "NOT_REQUIRED", "data": ["published courses"] },
+    { "id": "EP-2", "kind": "server_action", "path": "src/actions/admin.ts#deleteTransactionAction", "exposure": "role", "roles": ["admin"], "auth_check": "UNKNOWN", "data": ["transactions"], "money": true },
+    { "id": "EP-3", "kind": "webhook", "path": "GET /api/payment/callback", "exposure": "public", "auth_check": "NOT_REQUIRED", "data": ["transactions", "enrollments"], "money": true, "note": "authenticity comes from the provider's signed token, not from a session" }
+  ],
+  "money_flows": [
+    { "id": "MF-1", "description": "<e.g. checkout: init → provider → callback → enrollment active>", "states": ["pending", "completed", "failed"], "entry_points": ["EP-3"] }
+  ]
+}

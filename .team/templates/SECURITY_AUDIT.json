@@ -1,0 +1,41 @@
+{
+  "task_id": "TASK-001",
+  "profile": "web",
+  "verdict": "INCOMPLETE",
+  "summary": "<بالعربية: سطران عمّا اختُبر وما لم يُختبر — بلا كلمة آمن>",
+  "environment": {
+    "target": "http://localhost:3000",
+    "attack_env": "neon-branch",
+    "head_sha": "<sha>"
+  },
+  "scanners_source": ".team/tasks/<id>/evidence/<run>/summary.json",
+  "coverage": [
+    { "axis": "access_control", "status": "TESTED_DYNAMIC", "abuse_cases": ["AB-1"] },
+    { "axis": "authentication", "status": "REVIEWED_STATIC", "reason": "no auth change in diff; reviewed middleware only" },
+    { "axis": "injection", "status": "TESTED_DYNAMIC", "abuse_cases": ["AB-3"] },
+    { "axis": "business_logic", "status": "NOT_TESTED", "reason": "<why>" },
+    { "axis": "mass_assignment_data_exposure", "status": "TESTED_DYNAMIC", "abuse_cases": ["AB-4"] },
+    { "axis": "resource_abuse_uploads", "status": "NOT_APPLICABLE", "reason": "no upload or rate-limited endpoint in diff" },
+    { "axis": "configuration_secrets_supply_chain", "status": "REVIEWED_STATIC", "reason": "scanners + bundle review" }
+  ],
+  "scanner_triage": [
+    { "tool": "semgrep", "rule": "<rule-id>", "location": "<file:line>", "classification": "false_positive", "reason": "<why>" }
+  ],
+  "findings": [
+    {
+      "id": "SEC-01",
+      "axis": "access_control",
+      "severity": "critical",
+      "proof": "confirmed",
+      "location": "<file:line>",
+      "exploit": {
+        "request": "GET /api/<resource>/<id-of-tenant-A> (session: tenant B user)",
+        "response": "200 OK + tenant A record (see attacks/AB-1.md)"
+      },
+      "scenario": "<بالعربية>",
+      "fix": "<بالعربية: اشتقاق tenant_id من الجلسة ورفض المعرّفات العابرة للمستأجرين>",
+      "plain": "<جملة واحدة لصاحب القرار بلا مصطلحات، مثل: قد يرى عميل بيانات عميل آخر>",
+      "reference": "OWASP A01:2025"
+    }
+  ]
+}

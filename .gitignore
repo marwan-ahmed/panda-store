@@ -39,3 +39,9 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Marwan SAT — runtime files (not committed)
+.team/STATE.json
+.team/evidence/
+.team/tasks/*/evidence/
+sat-evidence/

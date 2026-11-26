@@ -1,0 +1,59 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "marwan-sat/inventory.schema.json",
+  "title": "Marwan SAT — INVENTORY.json (architect, audit phase INVENTORY)",
+  "description": "Evidence-backed facts about the environment and every entry point with its server-side check. Validated by core/bin/lib/audit.mjs (validateInventory): the topics runtime, hosting, database and auth are required; a non-public entry point cannot be NOT_REQUIRED.",
+  "type": "object",
+  "required": ["task_id", "environment", "entry_points"],
+  "properties": {
+    "task_id": { "type": "string" },
+    "environment": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "topic", "fact"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^ENV-\\d+$" },
+          "topic": { "enum": ["runtime", "hosting", "database", "db_driver", "auth", "payments", "storage", "email", "other"] },
+          "fact": { "type": "string" },
+          "status": { "enum": ["known", "unknown"], "default": "known" },
+          "evidence": { "type": "string", "description": "file#symbol, a config key, or a command and its output. Required when status is known." },
+          "question": { "type": "string", "description": "Required when status is unknown: the question that would settle the fact." }
+        }
+      }
+    },
+    "entry_points": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "kind", "path", "exposure", "auth_check"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^EP-\\d+$" },
+          "kind": { "enum": ["route", "server_action", "page", "webhook", "cron", "deep_link", "screen", "other"] },
+          "path": { "type": "string" },
+          "exposure": { "enum": ["public", "authenticated", "role"] },
+          "roles": { "type": "array", "items": { "type": "string" } },
+          "auth_check": { "type": "string", "description": "file#symbol of the server-side check, or MISSING, UNKNOWN, NOT_REQUIRED (public only). A client-side guard is MISSING." },
+          "data": { "type": "array", "items": { "type": "string" } },
+          "money": { "type": "boolean" },
+          "note": { "type": "string" }
+        }
+      }
+    },
+    "money_flows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "description"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^MF-\\d+$" },
+          "description": { "type": "string" },
+          "states": { "type": "array", "items": { "type": "string" } },
+          "entry_points": { "type": "array", "items": { "type": "string" } }
+        }
+      }
+    }
+  }
+}

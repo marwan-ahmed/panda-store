@@ -1,0 +1,25 @@
+{
+  "task_id": "TASK-001",
+  "base_sha": "<sha>",
+  "head_sha": "<sha>",
+  "verdict": "BLOCKED",
+  "test_integrity": {
+    "frozen_sha": "<sha>",
+    "tests_modified": false,
+    "skipped_tests": 0
+  },
+  "findings": [
+    {
+      "id": "REV-01",
+      "lens": "money",
+      "severity": "high",
+      "proof": "confirmed",
+      "location": "src/lib/<file>.ts:42",
+      "scenario": "<بالعربية: مدخلات محددة تكسر السلوك والنتيجة الخاطئة>",
+      "evidence": "<failing test name, or .team/tasks/<id>/review/<script> + its output>",
+      "fix": "<بالعربية: التعديل المطلوب>",
+      "plain": "<جملة واحدة لصاحب القرار بلا مصطلحات: ماذا قد يحدث ولمن>",
+      "trace": ["AC-4", "R3"]
+    }
+  ]
+}

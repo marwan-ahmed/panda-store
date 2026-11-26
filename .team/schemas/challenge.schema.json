@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "marwan-sat/challenge.schema.json",
+  "title": "Marwan SAT — challenge/by-<reviewer|auditor>.json (audit phase CHALLENGE)",
+  "description": "The reviewer challenges security.json and gaps.json; the auditor challenges logic-money.json. Every assigned finding is reviewed exactly once (checked by core/bin/lib/audit.mjs). A dispute changes nothing by itself: only the owner lowers a severity.",
+  "type": "object",
+  "required": ["task_id", "challenger", "reviews", "missed"],
+  "properties": {
+    "task_id": { "type": "string" },
+    "challenger": { "enum": ["reviewer", "auditor"] },
+    "reviews": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["finding", "verdict", "reason", "checks"],
+        "properties": {
+          "finding": { "type": "string" },
+          "verdict": { "enum": ["upheld", "disputed", "duplicate"] },
+          "reason": { "type": "string" },
+          "checks": {
+            "type": "object",
+            "required": ["reachable", "fix_valid_in_env", "severity_ok", "external_claims_verified"],
+            "properties": {
+              "reachable": { "enum": ["yes", "no", "unknown", "na"] },
+              "fix_valid_in_env": { "enum": ["yes", "no", "unknown", "na"] },
+              "severity_ok": { "enum": ["yes", "no", "unknown", "na"] },
+              "external_claims_verified": { "enum": ["yes", "no", "unknown", "na"] }
+            }
+          },
+          "proposed_severity": { "enum": ["critical", "high", "medium", "low"] },
+          "duplicate_of": { "type": "string" }
+        }
+      }
+    },
+    "conflicts": { "type": "array", "items": { "type": "object", "required": ["findings", "note"], "properties": { "findings": { "type": "array", "minItems": 2, "items": { "type": "string" } }, "note": { "type": "string" } } } },
+    "dependencies": { "type": "array", "items": { "type": "object", "required": ["finding", "after", "reason"], "properties": { "finding": { "type": "string" }, "after": { "type": "string" }, "reason": { "type": "string" } } } },
+    "missed": { "type": "array", "items": { "$ref": "findings.schema.json#/$defs/finding" } }
+  }
+}

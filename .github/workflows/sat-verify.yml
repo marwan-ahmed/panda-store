@@ -1,0 +1,50 @@
+# Marwan SAT — generated file (do not edit; run `sat regenerate`).
+# Runs the same deterministic gate as `node .team/bin/verify.mjs`, on every pull request.
+# In CI the security scanners are mandatory. Evidence is uploaded as an artifact.
+name: SAT Verify
+
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sat-verify-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+
+      - name: Enable corepack (pnpm / yarn)
+        run: corepack enable
+
+      - name: Install security scanners
+        env:
+          GITLEAKS_VERSION: "8.30.1"
+        run: |
+          pipx install semgrep
+          curl -sSfL "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz" | tar -xz -C "$RUNNER_TEMP" gitleaks
+          echo "$RUNNER_TEMP" >> "$GITHUB_PATH"
+
+      - name: SAT verify
+        run: node .team/bin/verify.mjs --ci --base "origin/${{ github.base_ref || 'main' }}" --out sat-evidence
+
+      - name: Upload evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sat-evidence
+          path: sat-evidence
+          retention-days: 30

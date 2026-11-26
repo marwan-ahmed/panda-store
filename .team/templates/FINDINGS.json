@@ -1,0 +1,69 @@
+{
+  "task_id": "TASK-001",
+  "lens": "security",
+  "profile": "web",
+  "examined": ["<what you actually read or ran: e.g. every server action under src/actions/, the payment routes, the verify scanner logs>"],
+  "not_examined": [{ "what": "<e.g. dynamic attacks>", "reason": "<e.g. attack_env is none>" }],
+  "coverage": [
+    { "axis": "access_control", "status": "REVIEWED_STATIC" },
+    { "axis": "authentication", "status": "REVIEWED_STATIC" },
+    { "axis": "injection", "status": "REVIEWED_STATIC" },
+    { "axis": "business_logic", "status": "REVIEWED_STATIC" },
+    { "axis": "mass_assignment_data_exposure", "status": "REVIEWED_STATIC" },
+    { "axis": "resource_abuse_uploads", "status": "REVIEWED_STATIC" },
+    { "axis": "configuration_secrets_supply_chain", "status": "REVIEWED_STATIC" }
+  ],
+  "entry_points_examined": [
+    { "id": "EP-4", "auth_check": "src/lib/auth/guards.ts#requireAdmin", "note": "<what the check verifies: session, role, ownership>" }
+  ],
+  "scanner_triage": [
+    { "step": "dependencies", "tool": "npm audit", "classification": "finding", "finding": "SEC-2", "reason": "<why>" }
+  ],
+  "findings": [
+    {
+      "id": "SEC-1",
+      "title": "<بالعربية: عنوان قصير>",
+      "type": "vulnerability",
+      "area": "authz",
+      "severity": "critical",
+      "proof": "suspected",
+      "source": "static_review",
+      "attacker": "authenticated",
+      "reachability": "unknown",
+      "location": "src/actions/admin.ts#deleteTransactionAction",
+      "files": ["src/actions/admin.ts"],
+      "entry_points": ["EP-2"],
+      "compensating_controls": [],
+      "problem": "<بالعربية: ما الخلل وأثره، بلا حل>",
+      "expected_behavior": "<بالعربية: السلوك الصحيح القابل للاختبار>",
+      "plain": "<جملة لصاحب القرار: قد يستطيع مستخدم عادي حذف معاملة مالية>",
+      "to_confirm": "<the exact request or test that would confirm or refute it, on localhost>",
+      "fix_hint": "<optional, non-binding>",
+      "fix_assumes": ["ENV-1", "ENV-5"],
+      "external_claims": [],
+      "blocked_by": [],
+      "decision_needed": null
+    },
+    {
+      "id": "SEC-2",
+      "title": "<بالعربية>",
+      "type": "dependency",
+      "area": "deps",
+      "severity": "high",
+      "proof": "confirmed",
+      "source": "scanner",
+      "package": "xlsx",
+      "usage": ["src/app/admin/users/page.tsx#exportUsers"],
+      "reachability": "unreachable",
+      "reachability_note": "<e.g. used only to write files; the vulnerable parser never reads user input>",
+      "location": "package.json#dependencies.xlsx",
+      "files": ["package.json", "package-lock.json"],
+      "evidence": ".team/tasks/TASK-001/evidence/<run>/dependencies.log",
+      "problem": "<بالعربية>",
+      "expected_behavior": "<بالعربية>",
+      "plain": "<جملة لصاحب القرار: مكتبة قديمة فيها ثغرة، لكن البرنامج لا يستخدم الجزء المصاب>",
+      "external_claims": [{ "claim": "<e.g. the fixed release is not on npm>", "source": "<URL or command>", "checked_at": "2026-11-22" }],
+      "isolate": true
+    }
+  ]
+}

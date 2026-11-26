@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "marwan-sat/task.schema.json",
+  "title": "Marwan SAT — .team/tasks/<id>/task.json (written by SAT tools only)",
+  "type": "object",
+  "required": ["id", "title", "path", "branch", "base_sha", "phase", "history"],
+  "properties": {
+    "id": { "type": "string", "pattern": "^TASK-\\d+$" },
+    "title": { "type": "string" },
+    "path": { "enum": ["full", "light"] },
+    "branch": { "type": "string" },
+    "base_ref": { "type": ["string", "null"] },
+    "base_sha": { "type": "string" },
+    "created_at": { "type": "string" },
+    "phase": {
+      "enum": ["INTAKE", "INTERPRET", "GATE_0", "DESIGN", "THREAT", "GATE_1", "TESTS", "IMPLEMENT", "REVIEW", "FIX", "REPORT", "GATE_2", "CLOSED", "ESCALATED", "CANCELLED"]
+    },
+    "interpret_round": { "type": "integer" },
+    "fix_cycles": { "type": "integer" },
+    "verify_failures": { "type": "integer" },
+    "frozen_sha": { "type": ["string", "null"] },
+    "cr": { "type": ["string", "null"] },
+    "gates": { "type": "object" },
+    "granted": { "type": "object" },
+    "last_verify": { "type": ["object", "null"] },
+    "report_hash": { "type": ["string", "null"] },
+    "escalated_from": { "type": ["string", "null"] },
+    "history": { "type": "array" }
+  }
+}

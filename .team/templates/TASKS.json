@@ -1,0 +1,15 @@
+{
+  "task_id": "TASK-001",
+  "path": "full",
+  "items": [
+    {
+      "id": "T1",
+      "title": "<task title from PLAN>",
+      "acceptance": ["AC-1", "AC-2"],
+      "abuse_cases": ["AB-1"],
+      "allowed_write": ["src/lib/<file>.ts"],
+      "depends_on": [],
+      "status": "pending"
+    }
+  ]
+}

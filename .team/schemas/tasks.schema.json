@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "marwan-sat/tasks.schema.json",
+  "title": "Marwan SAT — TASKS.json",
+  "type": "object",
+  "required": ["task_id", "path", "items"],
+  "properties": {
+    "task_id": { "type": "string", "pattern": "^TASK-\\d+$" },
+    "path": { "enum": ["full", "light"] },
+    "items": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "acceptance", "allowed_write"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^T\\d+$" },
+          "title": { "type": "string", "minLength": 1 },
+          "acceptance": { "type": "array", "items": { "type": "string", "pattern": "^AC-\\d+$" } },
+          "abuse_cases": { "type": "array", "items": { "type": "string", "pattern": "^AB-\\d+$" } },
+          "allowed_write": {
+            "type": "array",
+            "minItems": 1,
+            "items": { "type": "string", "not": { "enum": ["*", "**", "**/*", ".", "./", "/"] } }
+          },
+          "depends_on": { "type": "array", "items": { "type": "string" } },
+          "status": { "enum": ["pending", "in_progress", "done", "blocked"] }
+        }
+      }
+    }
+  }
+}

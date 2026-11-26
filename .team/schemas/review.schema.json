@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "marwan-sat/review.schema.json",
+  "title": "Marwan SAT — REVIEW.json (adversarial reviewer)",
+  "type": "object",
+  "required": ["task_id", "verdict", "findings"],
+  "properties": {
+    "task_id": { "type": "string" },
+    "base_sha": { "type": "string" },
+    "head_sha": { "type": "string" },
+    "verdict": { "enum": ["BLOCKED", "CLEAR_WITHIN_SCOPE"] },
+    "test_integrity": {
+      "type": "object",
+      "properties": {
+        "frozen_sha": { "type": ["string", "null"] },
+        "tests_modified": { "type": "boolean" },
+        "skipped_tests": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "lens", "severity", "proof", "location", "scenario", "fix"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^REV-\\d+$" },
+          "lens": { "enum": ["logic", "money", "test_integrity"] },
+          "severity": { "enum": ["critical", "high", "medium", "low"] },
+          "proof": { "enum": ["confirmed", "suspected"] },
+          "location": { "type": "string" },
+          "scenario": { "type": "string" },
+          "evidence": { "type": "string" },
+          "fix": { "type": "string" },
+          "plain": { "type": "string", "description": "One sentence for the owner, without jargon (required for critical/high/medium when owner.audience is simple)" },
+          "trace": { "type": "array", "items": { "type": "string" } }
+        },
+        "if": { "properties": { "proof": { "const": "confirmed" } } },
+        "then": { "required": ["evidence"] }
+      }
+    }
+  }
+}

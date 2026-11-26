@@ -1,0 +1,23 @@
+{
+  "task_id": "TASK-001",
+  "challenger": "reviewer",
+  "reviews": [
+    {
+      "finding": "SEC-1",
+      "verdict": "upheld",
+      "reason": "<always required: what you checked>",
+      "checks": { "reachable": "yes", "fix_valid_in_env": "yes", "severity_ok": "yes", "external_claims_verified": "na" }
+    },
+    {
+      "finding": "SEC-2",
+      "verdict": "disputed",
+      "reason": "<e.g. the vulnerable function is never reached: export only>",
+      "checks": { "reachable": "no", "fix_valid_in_env": "yes", "severity_ok": "no", "external_claims_verified": "yes" },
+      "proposed_severity": "low"
+    },
+    { "finding": "GAP-3", "verdict": "duplicate", "duplicate_of": "SEC-1", "reason": "<same root cause>", "checks": { "reachable": "yes", "fix_valid_in_env": "na", "severity_ok": "yes", "external_claims_verified": "na" } }
+  ],
+  "conflicts": [{ "findings": ["SEC-5", "GAP-7"], "note": "<what clashes and what the owner must decide>" }],
+  "dependencies": [{ "finding": "REV-2", "after": "GAP-1", "reason": "<why REV-2 can only be fixed after GAP-1>" }],
+  "missed": []
+}

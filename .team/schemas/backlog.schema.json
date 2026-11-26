@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "marwan-sat/backlog.schema.json",
+  "title": "Marwan SAT — BACKLOG.json (written by backlog.mjs only)",
+  "type": "object",
+  "required": ["tool", "audit_task", "items"],
+  "properties": {
+    "tool": { "const": "marwan-sat/backlog" },
+    "audit_task": { "type": "string" },
+    "sha": { "type": "string" },
+    "stats": { "type": "object" },
+    "owner_actions": { "type": "array", "items": { "type": "string" } },
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "title", "priority", "path", "findings", "files", "depends_on", "request"],
+        "properties": {
+          "id": { "type": "string", "pattern": "^B-\\d+$" },
+          "title": { "type": "string" },
+          "priority": { "enum": ["P0", "P1", "P2", "P3"] },
+          "path": { "enum": ["full", "light"] },
+          "path_reason": { "type": "string" },
+          "area": { "type": "string" },
+          "governance": { "type": "string" },
+          "findings": { "type": "array" },
+          "files": { "type": "array", "items": { "type": "string" } },
+          "depends_on": { "type": "array", "items": { "type": "object", "required": ["item", "type"], "properties": { "item": { "type": "string" }, "type": { "enum": ["governance", "logical"] }, "reason": { "type": "string" } } } },
+          "conflicts_with": { "type": "array" },
+          "shares_files_with": { "type": "array", "items": { "type": "string" } },
+          "promoted": { "type": ["object", "null"] },
+          "decisions": { "type": "array", "items": { "type": "string" } },
+          "confirm_first": { "type": "array" },
+          "request": { "type": "string" }
+        }
+      }
+    }
+  }
+}

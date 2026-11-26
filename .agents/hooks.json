@@ -1,0 +1,17 @@
+{
+  "marwan-sat-guard": {
+    "enabled": true,
+    "PreToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node .team/bin/guard.mjs",
+            "timeout": 10
+          }
+        ]
+      }
+    ]
+  }
+}
