@@ -22,3 +22,4 @@
 {"ts":"2026-11-26T19:33:12.779Z","type":"report","task":"TASK-001","sha":"742f2e12b436ff0f4d42d253c1c0b08632c09e1f"}
 {"ts":"2026-11-26T19:33:52.154Z","type":"phase","task":"TASK-001","from":"REPORT","to":"GATE_2","acceptance_needed":["REV-01"]}
 {"ts":"2026-11-27T13:29:27.942Z","type":"risk_accepted","task":"TASK-001","ids":["REV-01"],"note":"اعتمد النتيجة"}
+{"ts":"2026-11-27T14:19:16.545Z","type":"phase","task":"TASK-001","from":"GATE_2","to":"CLOSED","via":"merge"}
