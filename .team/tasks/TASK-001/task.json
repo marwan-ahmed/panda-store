@@ -38,6 +38,14 @@
         "at": "2026-11-26T18:47:36.328Z",
         "mode": "agent"
       }
+    ],
+    "GATE_2": [
+      {
+        "decision": "approve",
+        "note": "اعتمد النتيجة",
+        "at": "2026-11-27T13:29:27.941Z",
+        "mode": "agent"
+      }
     ]
   },
   "granted": {
@@ -169,5 +177,12 @@
   "escalated_from": "IMPLEMENT",
   "acceptance_needed": [
     "REV-01"
-  ]
+  ],
+  "risk_accepted": {
+    "ids": [
+      "REV-01"
+    ],
+    "note": "اعتمد النتيجة",
+    "at": "2026-11-27T13:29:27.942Z"
+  }
 }
