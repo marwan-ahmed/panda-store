@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-label="رسم توضيحي لمصباح مكتب ليلي بشكل باندا">
+  <title>مصباح مكتب ليلي بشكل باندا</title>
+  <rect width="400" height="300" rx="24" fill="#1E293B" />
+  <circle cx="200" cy="145" r="108" fill="#334155" />
+  <circle cx="200" cy="145" r="82" fill="#FEF3C7" opacity="0.22" />
+  <rect x="136" y="232" width="128" height="22" rx="11" fill="#475569" stroke="#0F172A" stroke-width="5" />
+  <circle cx="152" cy="100" r="18" fill="#0F172A" />
+  <circle cx="248" cy="100" r="18" fill="#0F172A" />
+  <path d="M140 166c0-42 26-70 60-70s60 28 60 70c0 34-22 66-60 66s-60-32-60-66z" fill="#FFFBEB" stroke="#0F172A" stroke-width="6" />
+  <ellipse cx="178" cy="154" rx="12" ry="15" transform="rotate(-12 178 154)" fill="#0F172A" />
+  <ellipse cx="222" cy="154" rx="12" ry="15" transform="rotate(12 222 154)" fill="#0F172A" />
+  <circle cx="180" cy="150" r="3.5" fill="#FDE68A" />
+  <circle cx="220" cy="150" r="3.5" fill="#FDE68A" />
+  <ellipse cx="200" cy="172" rx="7" ry="5" fill="#0F172A" />
+  <path d="M190 183c4 5 16 5 20 0" fill="none" stroke="#0F172A" stroke-width="3.5" stroke-linecap="round" />
+  <circle cx="288" cy="76" r="6" fill="#FDE68A" />
+  <circle cx="106" cy="92" r="4" fill="#FDE68A" />
+  <circle cx="304" cy="116" r="4" fill="#FDE68A" />
+</svg>

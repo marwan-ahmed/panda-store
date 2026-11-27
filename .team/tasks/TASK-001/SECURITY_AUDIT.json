@@ -1,0 +1,75 @@
+{
+  "task_id": "TASK-001",
+  "profile": "web",
+  "verdict": "CLEAR_WITHIN_SCOPE",
+  "summary": "تم تدقيق تعديلات TASK-001 ساكناً واختبار التطبيق المبني ديناميكياً على http://127.0.0.1:3000 عبر حالات الإساءة AB-1 إلى AB-11 (رموز HTTP 200/404 مع cacheComponents، غياب API وServer Actions والكوكيز، سلامة أسعار الدينار العراقي، صدّ مفاتيح prototype وحمولات XSS والترميز المشوّه، وفحص ملفات SVG العشرة وحزمة العميل). لم يُثبت وجود أي ثغرة خطير جداً (Critical) أو خطير (High) ضمن النطاق المختبر (وسُجّلت ملاحظة تقوية بسيطة Low لترويسات HTTP في next.config.ts)؛ كما أن أداتي gitleaks وsemgrep غير مثبتتين محلياً فتمت تغطيتهما بمراجعة يدوية للكود والحزم المبنية بجانب نجاح npm audit بلا ثغرات.",
+  "environment": {
+    "target": "http://127.0.0.1:3000",
+    "attack_env": "none",
+    "head_sha": "742f2e12b436ff0f4d42d253c1c0b08632c09e1f"
+  },
+  "scanners_source": ".team/tasks/TASK-001/evidence/20261126-192242-742f2e1/summary.json",
+  "coverage": [
+    {
+      "axis": "access_control",
+      "status": "TESTED_DYNAMIC",
+      "abuse_cases": ["AB-1", "AB-2"],
+      "reason": "اختُبرت مسارات / و/products/1..10 و/products و/products/99 و/products/1/extra واجتياز المسارات وطلبات RSC وPOST Next-Action و/api/* و/cart و/checkout و/admin ديناميكياً على الخادم المحلي؛ لا توجد أدوار أو مستأجرون في هذا النطاق العام للقراءة فقط."
+    },
+    {
+      "axis": "authentication",
+      "status": "TESTED_DYNAMIC",
+      "abuse_cases": ["AB-3"],
+      "reason": "تم التحقق ديناميكياً من غياب Set-Cookie وإرجاع 404 لمسارات /login و/signup و/account و/api/auth/session وثبات الاستجابة مع ترويسات Cookie/Authorization/X-User-Role المزورة، وبالمراجعة الساكنة لعدم استدعاء cookies()."
+    },
+    {
+      "axis": "injection",
+      "status": "TESTED_DYNAMIC",
+      "abuse_cases": ["AB-6", "AB-7", "AB-8"],
+      "reason": "اختُبرت ديناميكياً مفاتيح Object.prototype (__proto__ وconstructor وtoString) وحمولات XSS الخام والمشفّرة والترميز التالف (%E0%A4%A و%) واستعلامات URL، وجميع ملفات SVG العشرة، ورفض /_next/image لـ SVG بحالة 400، مع فحص validateProduct."
+    },
+    {
+      "axis": "business_logic",
+      "status": "TESTED_DYNAMIC",
+      "abuse_cases": ["AB-4", "AB-5"],
+      "reason": "تم التحقق من الاستجابات الحية على / و/products/1..10 لعرض 10 منتجات فقط بأسعار أعداد صحيحة موجبة بالدينار العراقي دون خصومات أو ضرائب أو رسوم توصيل، إضافة إلى فحص دوال التحقق validatePriceIqd وformatPriceIqd وvalidateCatalog."
+    },
+    {
+      "axis": "mass_assignment_data_exposure",
+      "status": "TESTED_DYNAMIC",
+      "abuse_cases": ["AB-9"],
+      "reason": "تم التحقق من استجابات 200 و404 وRSC الحية لعدم كشف أي مسارات داخلية أو تتبع أخطاء أو بيانات شخصية أو حقول غير مصرح بها، إضافة إلى فحص إسقاط الحقول الإضافية في validateProduct."
+    },
+    {
+      "axis": "resource_abuse_uploads",
+      "status": "TESTED_DYNAMIC",
+      "abuse_cases": ["AB-10"],
+      "reason": "اختُبرت المسارات العميقة والمعرف بطول 4096 محرفاً وحقن معاملات الاستعلام ودفعة 50 طلباً (243 مللي ثانية، 50x 404) ومحاولة POST /api/upload؛ لا توجد أي نقاط رفع ملفات في التطبيق."
+    },
+    {
+      "axis": "configuration_secrets_supply_chain",
+      "status": "TESTED_DYNAMIC",
+      "abuse_cases": ["AB-11"],
+      "reason": "اختُبرت ترويسات الاستجابة وحقن Host/X-Forwarded-Host/Origin ديناميكياً على الخادم المحلي، مع مراجعة next.config.ts وpackage.json وحزم العميل التسع في .next/static/chunks/ ونتيجة npm audit (0 vulnerabilities في dependencies.log؛ بينما gitleaks وsemgrep غير مثبتتين)."
+    }
+  ],
+  "scanner_triage": [],
+  "findings": [
+    {
+      "id": "SEC-01",
+      "axis": "configuration_secrets_supply_chain",
+      "severity": "low",
+      "proof": "confirmed",
+      "location": "next.config.ts#nextConfig",
+      "exploit": {
+        "request": "GET /images/products/product-01.svg and GET / on http://127.0.0.1:3000",
+        "response": "HTTP 200 without X-Content-Type-Options, Content-Security-Policy, X-Frame-Options, or Referrer-Policy headers, and with X-Powered-By: Next.js on HTML responses (see attacks/AB-11.md and attacks/probe-results.json)"
+      },
+      "evidence": ".team/tasks/TASK-001/attacks/AB-11.md",
+      "scenario": "لا تضيف تهيئة Next.js الحالية ترويسات الحماية الثابتة (X-Content-Type-Options وContent-Security-Policy وX-Frame-Options وReferrer-Policy) على استجابات HTML أو ملفات SVG المستقلة، كما تُرسل ترويسة X-Powered-By: Next.js على الصفحات. وفي ظل خلو النطاق الحالي من الجلسات والنماذج والرفع وخلو ملفات SVG العشرة من السكربتات (AB-8)، لا يوجد أثر استغلالي مباشر الآن، لكنها طبقة تقوية دفاعية مطلوبة قبل أي نشر عام.",
+      "fix": "في مهمة تقوية لاحقة (لأن next.config.ts خارج نطاق ملفات TASK-001، وبمراعاة أن cacheComponents: true وpartialPrefetching: true لا يناسبهما CSP معتمد على nonce للصفحات الثابتة)، أضف دالة headers() ثابتة في next.config.ts تتضمن X-Content-Type-Options: nosniff وReferrer-Policy: strict-origin-when-cross-origin وX-Frame-Options: DENY (وContent-Security-Policy: default-src 'none'; style-src 'unsafe-inline' لمسار /images/products/:path*) واضبط poweredByHeader: false.",
+      "plain": "تغيب بعض ترويسات الحماية الإضافية عن استجابات المتجر والصور عند تصفحها مباشرة، وهذا لا يسبب ضرراً في النسخة التجريبية الحالية ولكنه يُحسَّن قبل النشر العام للمستخدمين.",
+      "reference": "OWASP A02:2025, ASVS 5.0 V14"
+    }
+  ]
+}

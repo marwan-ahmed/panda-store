@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-label="رسم توضيحي لحقيبة قماشية بطبعة باندا">
+  <title>حقيبة قماشية بطبعة باندا</title>
+  <rect width="400" height="300" rx="24" fill="#F4F6F8" />
+  <circle cx="200" cy="155" r="102" fill="#DCE8DF" />
+  <path d="M162 106V68c0-20 16-34 38-34s38 14 38 34v38" fill="none" stroke="#2D6A4F" stroke-width="10" stroke-linecap="round" />
+  <path d="M116 104h168l14 148c1 8-6 16-14 16H116c-8 0-15-8-14-16l14-148z" fill="#FFFDF7" stroke="#1F2937" stroke-width="7" stroke-linejoin="round" />
+  <line x1="118" y1="126" x2="282" y2="126" stroke="#CBD5E1" stroke-width="4" stroke-dasharray="8 6" />
+  <circle cx="164" cy="162" r="14" fill="#1F2937" />
+  <circle cx="236" cy="162" r="14" fill="#1F2937" />
+  <circle cx="200" cy="190" r="42" fill="#FFFFFF" stroke="#1F2937" stroke-width="5" />
+  <ellipse cx="183" cy="185" rx="10" ry="13" transform="rotate(-15 183 185)" fill="#1F2937" />
+  <ellipse cx="217" cy="185" rx="10" ry="13" transform="rotate(15 217 185)" fill="#1F2937" />
+  <circle cx="184" cy="182" r="3" fill="#FFFFFF" />
+  <circle cx="216" cy="182" r="3" fill="#FFFFFF" />
+  <ellipse cx="200" cy="200" rx="6" ry="4.5" fill="#1F2937" />
+  <path d="M190 210c4 5 16 5 20 0" fill="none" stroke="#1F2937" stroke-width="3" stroke-linecap="round" />
+</svg>

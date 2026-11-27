@@ -1,1 +1,24 @@
 {"ts":"2026-11-26T14:43:51.104Z","type":"sat_installed","version":"0.5.0","stack":"nextjs","platform":"antigravity"}
+{"ts":"2026-11-26T15:31:29.180Z","type":"task_created","task":"TASK-001","title":"كتالوج منتجات باندا ستور وتفاصيلها","kind":"change","path":"full","branch":"sat/TASK-001","base_ref":"main","base_sha":"aed68934fdf900324f19248809881a2fa89016d0"}
+{"ts":"2026-11-26T15:31:50.353Z","type":"phase","task":"TASK-001","from":"INTAKE","to":"INTERPRET"}
+{"ts":"2026-11-26T15:36:42.890Z","type":"phase","task":"TASK-001","from":"INTERPRET","to":"GATE_0","blocking_questions":1,"sensitive_assumptions":1}
+{"ts":"2026-11-26T16:49:04.630Z","type":"phase","task":"TASK-001","from":"GATE_0","to":"INTERPRET","gate":"GATE_0","note":"Q1: (أ) — يظهر الكتالوج في الصفحة الرئيسية مباشرة بدل عبارة «المتجر قيد البناء». A1: مؤكد — لكل منتج سعر واحد ثابت، عدد صحيح موجب بالدينار العراقي، بلا خصومات ولا أسعار سابقة ولا ضرائب ولا رسوم توصيل."}
+{"ts":"2026-11-26T16:51:56.518Z","type":"phase","task":"TASK-001","from":"INTERPRET","to":"DESIGN"}
+{"ts":"2026-11-26T16:58:12.060Z","type":"phase","task":"TASK-001","from":"DESIGN","to":"THREAT"}
+{"ts":"2026-11-26T17:02:24.893Z","type":"phase","task":"TASK-001","from":"THREAT","to":"GATE_1"}
+{"ts":"2026-11-26T18:46:35.310Z","type":"phase","task":"TASK-001","from":"GATE_1","to":"GATE_START","gate":"GATE_1","note":"اعتمد الخطة"}
+{"ts":"2026-11-26T18:47:36.331Z","type":"phase","task":"TASK-001","from":"GATE_START","to":"TESTS","gate":"GATE_START","note":"ابدأ التنفيذ"}
+{"ts":"2026-11-26T18:54:06.220Z","type":"phase","task":"TASK-001","from":"TESTS","to":"IMPLEMENT","frozen_sha":"1a0e0e1e669dbddfe58dca1ed1bf883f3214f99d"}
+{"ts":"2026-11-26T18:57:09.512Z","type":"phase","task":"TASK-001","from":"IMPLEMENT","to":"DESIGN","reason":"CHANGE_REQUEST-1","change_request":"CHANGE_REQUEST-1.md"}
+{"ts":"2026-11-26T19:01:06.628Z","type":"phase","task":"TASK-001","from":"DESIGN","to":"TESTS","cr_classification":"clarification"}
+{"ts":"2026-11-26T19:02:29.432Z","type":"phase","task":"TASK-001","from":"TESTS","to":"IMPLEMENT","frozen_sha":"86117033fc292c5f24f2e09134af3fa14ffde893"}
+{"ts":"2026-11-26T19:17:01.212Z","type":"verify","task":"TASK-001","phase":"IMPLEMENT","sha":"742f2e12b436ff0f4d42d253c1c0b08632c09e1f","result":"fail","dir":".team/tasks/TASK-001/evidence/20261126-191647-742f2e1"}
+{"ts":"2026-11-26T19:19:24.381Z","type":"verify","task":"TASK-001","phase":"IMPLEMENT","sha":"742f2e12b436ff0f4d42d253c1c0b08632c09e1f","result":"fail","dir":".team/tasks/TASK-001/evidence/20261126-191911-742f2e1"}
+{"ts":"2026-11-26T19:19:24.383Z","type":"phase","task":"TASK-001","from":"IMPLEMENT","to":"ESCALATED","reason":"verify_failures limit"}
+{"ts":"2026-11-26T19:22:29.411Z","type":"phase","task":"TASK-001","from":"ESCALATED","to":"IMPLEMENT","note":"الخيار 1","resumed_from":"IMPLEMENT"}
+{"ts":"2026-11-26T19:23:30.185Z","type":"verify","task":"TASK-001","phase":"IMPLEMENT","sha":"742f2e12b436ff0f4d42d253c1c0b08632c09e1f","result":"pass","dir":".team/tasks/TASK-001/evidence/20261126-192242-742f2e1"}
+{"ts":"2026-11-26T19:23:54.999Z","type":"phase","task":"TASK-001","from":"IMPLEMENT","to":"REVIEW","verified_sha":"742f2e12b436ff0f4d42d253c1c0b08632c09e1f"}
+{"ts":"2026-11-26T19:33:00.807Z","type":"phase","task":"TASK-001","from":"REVIEW","to":"REPORT"}
+{"ts":"2026-11-26T19:33:12.779Z","type":"report","task":"TASK-001","sha":"742f2e12b436ff0f4d42d253c1c0b08632c09e1f"}
+{"ts":"2026-11-26T19:33:52.154Z","type":"phase","task":"TASK-001","from":"REPORT","to":"GATE_2","acceptance_needed":["REV-01"]}
+{"ts":"2026-11-27T13:29:27.942Z","type":"risk_accepted","task":"TASK-001","ids":["REV-01"],"note":"اعتمد النتيجة"}

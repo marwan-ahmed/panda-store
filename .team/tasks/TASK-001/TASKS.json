@@ -1,0 +1,76 @@
+{
+  "task_id": "TASK-001",
+  "path": "full",
+  "items": [
+    {
+      "id": "T1",
+      "title": "Create 10 synthetic local SVG product illustrations",
+      "acceptance": ["AC-3", "AC-5", "AC-6", "AC-9"],
+      "abuse_cases": ["AB-8", "AB-10", "AB-11"],
+      "allowed_write": [
+        "public/images/products/product-01.svg",
+        "public/images/products/product-02.svg",
+        "public/images/products/product-03.svg",
+        "public/images/products/product-04.svg",
+        "public/images/products/product-05.svg",
+        "public/images/products/product-06.svg",
+        "public/images/products/product-07.svg",
+        "public/images/products/product-08.svg",
+        "public/images/products/product-09.svg",
+        "public/images/products/product-10.svg"
+      ],
+      "depends_on": [],
+      "status": "pending"
+    },
+    {
+      "id": "T2",
+      "title": "Implement static synthetic catalog, validation, and IQD price formatting",
+      "acceptance": ["AC-2", "AC-3", "AC-4", "AC-6", "AC-7"],
+      "abuse_cases": ["AB-4", "AB-5", "AB-6", "AB-8", "AB-9", "AB-11"],
+      "allowed_write": [
+        "src/lib/products.ts"
+      ],
+      "depends_on": ["T1"],
+      "status": "pending"
+    },
+    {
+      "id": "T3",
+      "title": "Build reusable Arabic RTL product card, details, and not-found UI components",
+      "acceptance": ["AC-1", "AC-3", "AC-5", "AC-6", "AC-7", "AC-8", "AC-9"],
+      "abuse_cases": ["AB-2", "AB-3", "AB-5", "AB-7", "AB-8", "AB-9"],
+      "allowed_write": [
+        "src/components/product-card.tsx",
+        "src/components/product-details.tsx",
+        "src/components/not-found-view.tsx"
+      ],
+      "depends_on": ["T2"],
+      "status": "pending"
+    },
+    {
+      "id": "T4",
+      "title": "Replace home page placeholder with the 10-product catalog on /",
+      "acceptance": ["AC-1", "AC-2", "AC-5", "AC-8", "AC-9"],
+      "abuse_cases": ["AB-2", "AB-3", "AB-5"],
+      "allowed_write": [
+        "src/app/page.tsx"
+      ],
+      "depends_on": ["T3"],
+      "status": "pending"
+    },
+    {
+      "id": "T5",
+      "title": "Implement product details route, Arabic 404 routes, and pre-stream 404 proxy guard",
+      "acceptance": ["AC-6", "AC-7", "AC-8", "AC-9"],
+      "abuse_cases": ["AB-1", "AB-2", "AB-3", "AB-6", "AB-7", "AB-9", "AB-10", "AB-11"],
+      "allowed_write": [
+        "src/app/products/[id]/page.tsx",
+        "src/app/products/[id]/not-found.tsx",
+        "src/app/products/page.tsx",
+        "src/app/not-found.tsx",
+        "src/proxy.ts"
+      ],
+      "depends_on": ["T2", "T3"],
+      "status": "pending"
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" width="400" height="300" role="img" aria-label="رسم توضيحي لوسادة قطنية برسم باندا">
+  <title>وسادة قطنية برسم باندا</title>
+  <rect width="400" height="300" rx="24" fill="#F5F3FF" />
+  <circle cx="200" cy="150" r="104" fill="#E4EFE7" />
+  <circle cx="122" cy="74" r="24" fill="#1F2937" />
+  <circle cx="278" cy="74" r="24" fill="#1F2937" />
+  <path d="M104 92c34-14 158-14 192 0 14 36 14 106 0 142-34 14-158 14-192 0-14-36-14-106 0-142z" fill="#FFFFFF" stroke="#1F2937" stroke-width="7" stroke-linejoin="round" />
+  <path d="M116 104c30-10 138-10 168 0" fill="none" stroke="#D1FAE5" stroke-width="5" stroke-linecap="round" />
+  <ellipse cx="164" cy="148" rx="18" ry="22" transform="rotate(-15 164 148)" fill="#1F2937" />
+  <ellipse cx="236" cy="148" rx="18" ry="22" transform="rotate(15 236 148)" fill="#1F2937" />
+  <circle cx="166" cy="144" r="5" fill="#FFFFFF" />
+  <circle cx="234" cy="144" r="5" fill="#FFFFFF" />
+  <circle cx="144" cy="176" r="10" fill="#FCA5A5" opacity="0.65" />
+  <circle cx="256" cy="176" r="10" fill="#FCA5A5" opacity="0.65" />
+  <ellipse cx="200" cy="174" rx="10" ry="7" fill="#1F2937" />
+  <path d="M186 188c6 7 22 7 28 0" fill="none" stroke="#1F2937" stroke-width="4" stroke-linecap="round" />
+</svg>
