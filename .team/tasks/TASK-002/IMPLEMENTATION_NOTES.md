@@ -17,3 +17,6 @@
 ## Not done / known limitations
 - Raised `.team/tasks/TASK-002/CHANGE_REQUEST-1.md` (`CR-1`) for `tests/cart-ui.test.tsx` (`AC-7` and `AB-8`), where `getByText(...)` matches multiple identical IQD amount spans (`priceIqd`, `lineSubtotalIqd`, `cartTotalIqd`) rendered per `SPEC.md` AC-6.
 - `verify.mjs` has not been run yet pending `CR-1` resolution and test re-freeze.
+
+## FIX phase (REV-01)
+- Added `useLayoutEffect` cleanup in `src/components/cart-view.tsx#CartView` to reset `draftQuantities` (`{}`) and `alertMessage` (`null`) when React `<Activity mode="hidden">` hides or unmounts the view.

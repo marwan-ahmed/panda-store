@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import {
   MIN_CART_QUANTITY,
   formatCartTotalIqd,
@@ -29,6 +29,13 @@ export function CartView() {
     Readonly<Record<string, string>>
   >({});
   const [alertMessage, setAlertMessage] = useState<string | null>(null);
+
+  useLayoutEffect(() => {
+    return () => {
+      setDraftQuantities({});
+      setAlertMessage(null);
+    };
+  }, []);
 
   function clearDraftFor(productId: string) {
     setDraftQuantities((prev) => {
