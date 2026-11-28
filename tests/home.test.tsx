@@ -82,13 +82,13 @@ describe("الصفحة الرئيسية والكتالوج", () => {
     expect(single.container.querySelector("del, s")).toBeNull();
   });
 
-  it("AC-8: تخلو جميع واجهات المتجر من السلة وأزرار الشراء والدفع وتسجيل الدخول والبحث والتصفية", async () => {
+  it("AC-8: تخلو جميع واجهات المتجر من أزرار الشراء الفوري وإتمام الطلب والدفع وتسجيل الدخول والبحث والتصفية", async () => {
     const { getProducts } = await loadProductsModule();
     const { ProductDetails } = await loadProductDetailsModule();
     const { NotFoundView } = await loadNotFoundViewModule();
 
     const forbiddenUiPattern =
-      /سلة|أضف إلى السلة|إضافة إلى السلة|اشترِ|شراء|إتمام الطلب|تسجيل الدخول|إنشاء حساب|كلمة المرور|دفع عند الاستلام|الدفع الإلكتروني|تصفية|ترتيب|المخزون/;
+      /اشترِ|شراء|إتمام الطلب|تسجيل الدخول|إنشاء حساب|كلمة المرور|دفع عند الاستلام|الدفع الإلكتروني|تصفية|ترتيب|المخزون/;
 
     const homeRender = render(<Home />);
     expect(homeRender.container.querySelectorAll("form, input")).toHaveLength(0);
@@ -101,6 +101,7 @@ describe("الصفحة الرئيسية والكتالوج", () => {
     const notFoundRender = render(<NotFoundView />);
     expect(notFoundRender.container.querySelectorAll("form, input")).toHaveLength(0);
     expect(notFoundRender.container.textContent ?? "").not.toMatch(forbiddenUiPattern);
+    expect(notFoundRender.container.textContent ?? "").not.toMatch(/أضف إلى السلة|إضافة إلى السلة/);
   });
 
   it("AC-9: جميع النصوص والبيانات الوصفية وبيانات المنتجات بالعربية RTL دون روابط صور خارجية", async () => {

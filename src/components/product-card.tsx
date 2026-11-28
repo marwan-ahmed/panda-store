@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { AddToCartButton } from "@/components/add-to-cart-button";
 import { formatPriceIqd, type Product } from "@/lib/products";
 
 export interface ProductCardProps {
@@ -7,7 +8,7 @@ export interface ProductCardProps {
 }
 
 /**
- * Displays a single read-only catalog product card with fixed IQD pricing.
+ * Displays a catalog product card with fixed IQD pricing, details link, and add-to-cart action.
  */
 export function ProductCard({ product }: ProductCardProps) {
   const formattedPrice = formatPriceIqd(product.priceIqd);
@@ -36,13 +37,14 @@ export function ProductCard({ product }: ProductCardProps) {
         </p>
       </div>
 
-      <div className="mt-5 border-t border-neutral-100 pt-4 dark:border-neutral-800">
+      <div className="mt-5 flex flex-col gap-3 border-t border-neutral-100 pt-4 dark:border-neutral-800">
         <Link
           href={`/products/${product.id}`}
           className="inline-flex w-full items-center justify-center rounded-xl bg-emerald-700 px-4 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-emerald-800 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-emerald-700 dark:bg-emerald-600 dark:hover:bg-emerald-500"
         >
           عرض التفاصيل
         </Link>
+        <AddToCartButton productId={product.id} productName={product.name} />
       </div>
     </article>
   );

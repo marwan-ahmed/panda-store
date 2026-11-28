@@ -1,0 +1,20 @@
+{
+  "timestamp": "2026-11-28T08:34:04.552Z",
+  "repairedStorageJson": "{\"version\":1,\"items\":[{\"productId\":\"1\",\"quantity\":2}]}",
+  "afterXssInput": {
+    "inputValue": "<script>alert(1)</script>",
+    "alertMessage": "يرجى إدخال كمية صحيحة بين 1 و99.",
+    "htmlContainsRawScript": false,
+    "cartTextStillShows30k": true
+  },
+  "afterActivityHideSyncAndRestore": {
+    "alertMessage": null,
+    "inputValue": "5",
+    "restoredTotal75k": true
+  },
+  "afterMax99AlertHideAndRestore": {
+    "alertBeforeHide": "تم بلوغ الحد الأقصى للكمية (99 قطعة) لهذا المنتج.",
+    "alertAfterRestore": null,
+    "inputValueAfterRestore": "99"
+  }
+}

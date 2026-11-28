@@ -1,0 +1,194 @@
+{
+  "id": "TASK-002",
+  "title": "سلة التسوق وحساب المجموع بالدينار العراقي",
+  "kind": "change",
+  "path": "full",
+  "source": null,
+  "branch": "sat/TASK-002",
+  "base_ref": "main",
+  "base_sha": "8ba4d2682f7584eb5c4f56c82244df305b811b45",
+  "created_at": "2026-11-27T14:19:17.062Z",
+  "phase": "GATE_2",
+  "interpret_round": 2,
+  "fix_cycles": 0,
+  "verify_failures": 1,
+  "frozen_sha": "4bb7d48a50f8fde7ffb3921a675e3c52c121c880",
+  "cr": null,
+  "gates": {
+    "GATE_0": [
+      {
+        "decision": "approve",
+        "note": "اعتمد اقتراحك: Q1 (أ)، Q2 (أ)، وتأكيد A1 وA2",
+        "at": "2026-11-27T14:56:09.877Z",
+        "mode": "agent"
+      }
+    ],
+    "GATE_1": [
+      {
+        "decision": "approve",
+        "note": "اعتمد الخطة",
+        "at": "2026-11-28T07:06:58.624Z",
+        "mode": "agent"
+      }
+    ],
+    "GATE_START": [
+      {
+        "decision": "approve",
+        "note": "ابدأ التنفيذ",
+        "at": "2026-11-28T07:08:11.083Z",
+        "mode": "agent"
+      }
+    ],
+    "GATE_2": [
+      {
+        "decision": "changes",
+        "note": "عدّل: رسالة تنبيه أو رقم غير مكتمل ظاهرَين للزائر عند عودته إلى صفحة السلة بعد التنقل إلى صفحة أخرى",
+        "at": "2026-11-28T08:09:19.540Z",
+        "mode": "agent"
+      }
+    ]
+  },
+  "granted": {},
+  "last_verify": {
+    "sha": "922ae3907bc23544e1efb8020c769f8a3d26dc75",
+    "dirty": true,
+    "result": "pass",
+    "dir": ".team/tasks/TASK-002/evidence/20261128-083632-922ae39",
+    "at": "2026-11-28T08:37:34.813Z"
+  },
+  "report_hash": "5c67bd8e0ca855efa0ec70002c0b0c8d6725bd217f977a9f5151292b667c40c8",
+  "history": [
+    {
+      "phase": "INTAKE",
+      "at": "2026-11-27T14:19:17.062Z"
+    },
+    {
+      "phase": "INTERPRET",
+      "at": "2026-11-27T14:19:40.724Z",
+      "from": "INTAKE"
+    },
+    {
+      "phase": "GATE_0",
+      "at": "2026-11-27T14:24:00.340Z",
+      "from": "INTERPRET",
+      "blocking_questions": 2,
+      "sensitive_assumptions": 2
+    },
+    {
+      "phase": "INTERPRET",
+      "at": "2026-11-27T14:56:09.890Z",
+      "from": "GATE_0",
+      "gate": "GATE_0",
+      "note": "اعتمد اقتراحك: Q1 (أ)، Q2 (أ)، وتأكيد A1 وA2"
+    },
+    {
+      "phase": "DESIGN",
+      "at": "2026-11-27T14:58:42.387Z",
+      "from": "INTERPRET"
+    },
+    {
+      "phase": "THREAT",
+      "at": "2026-11-27T15:04:33.032Z",
+      "from": "DESIGN"
+    },
+    {
+      "phase": "GATE_1",
+      "at": "2026-11-27T15:08:24.978Z",
+      "from": "THREAT"
+    },
+    {
+      "phase": "GATE_START",
+      "at": "2026-11-28T07:06:58.637Z",
+      "from": "GATE_1",
+      "gate": "GATE_1",
+      "note": "اعتمد الخطة"
+    },
+    {
+      "phase": "TESTS",
+      "at": "2026-11-28T07:08:11.085Z",
+      "from": "GATE_START",
+      "gate": "GATE_START",
+      "note": "ابدأ التنفيذ"
+    },
+    {
+      "phase": "IMPLEMENT",
+      "at": "2026-11-28T07:15:47.870Z",
+      "from": "TESTS",
+      "frozen_sha": "cef11bdf900fe7ed5c968e60001e580606bf9147"
+    },
+    {
+      "phase": "DESIGN",
+      "at": "2026-11-28T07:32:18.425Z",
+      "from": "IMPLEMENT",
+      "reason": "CHANGE_REQUEST-1",
+      "change_request": "CHANGE_REQUEST-1.md"
+    },
+    {
+      "phase": "TESTS",
+      "at": "2026-11-28T07:34:35.401Z",
+      "from": "DESIGN",
+      "cr_classification": "clarification"
+    },
+    {
+      "phase": "IMPLEMENT",
+      "at": "2026-11-28T07:36:20.408Z",
+      "from": "TESTS",
+      "frozen_sha": "4bb7d48a50f8fde7ffb3921a675e3c52c121c880"
+    },
+    {
+      "phase": "REVIEW",
+      "at": "2026-11-28T07:37:53.018Z",
+      "from": "IMPLEMENT",
+      "verified_sha": "4bb7d48a50f8fde7ffb3921a675e3c52c121c880"
+    },
+    {
+      "phase": "REPORT",
+      "at": "2026-11-28T07:46:32.919Z",
+      "from": "REVIEW"
+    },
+    {
+      "phase": "GATE_2",
+      "at": "2026-11-28T07:47:35.587Z",
+      "from": "REPORT",
+      "acceptance_needed": [
+        "REV-01"
+      ]
+    },
+    {
+      "phase": "FIX",
+      "at": "2026-11-28T08:09:19.541Z",
+      "from": "GATE_2",
+      "gate": "GATE_2",
+      "note": "عدّل: رسالة تنبيه أو رقم غير مكتمل ظاهرَين للزائر عند عودته إلى صفحة السلة بعد التنقل إلى صفحة أخرى"
+    },
+    {
+      "phase": "ESCALATED",
+      "at": "2026-11-28T08:15:39.685Z",
+      "from": "FIX",
+      "reason": "check:tests_frozen flagged reviewer artifact .team/tasks/TASK-002/review/repro.test.tsx (matches **/*.test.*); owned by REVIEW phase, not writable in FIX"
+    },
+    {
+      "phase": "REVIEW",
+      "at": "2026-11-28T08:17:12.124Z",
+      "from": "ESCALATED",
+      "note": "الخيار 1",
+      "resumed_from": "FIX"
+    },
+    {
+      "phase": "REPORT",
+      "at": "2026-11-28T08:37:50.645Z",
+      "from": "REVIEW"
+    },
+    {
+      "phase": "GATE_2",
+      "at": "2026-11-28T08:38:39.417Z",
+      "from": "REPORT"
+    }
+  ],
+  "started": {
+    "at": "2026-11-28T07:08:11.085Z",
+    "note": "ابدأ التنفيذ"
+  },
+  "acceptance_needed": [],
+  "escalated_from": "FIX"
+}

@@ -1,0 +1,68 @@
+{
+  "task_id": "TASK-002",
+  "path": "full",
+  "items": [
+    {
+      "id": "T1",
+      "title": "Implement pure cart domain logic, quantity validation, catalog-backed pricing, and IQD total formatting",
+      "acceptance": ["AC-2", "AC-3", "AC-4", "AC-5", "AC-8"],
+      "abuse_cases": ["AB-3", "AB-4", "AB-5", "AB-6", "AB-7", "AB-9", "AB-13"],
+      "allowed_write": [
+        "src/lib/cart.ts"
+      ],
+      "depends_on": [],
+      "status": "pending"
+    },
+    {
+      "id": "T2",
+      "title": "Implement bounded browser storage sanitization, useSyncExternalStore cart store, and CartProvider",
+      "acceptance": ["AC-1", "AC-7", "AC-8", "AC-9", "AC-10"],
+      "abuse_cases": ["AB-2", "AB-3", "AB-4", "AB-7", "AB-8", "AB-9", "AB-10", "AB-11", "AB-12", "AB-13"],
+      "allowed_write": [
+        "src/lib/cart-storage.ts",
+        "src/lib/cart-store.ts",
+        "src/components/cart-provider.tsx"
+      ],
+      "depends_on": ["T1"],
+      "status": "pending"
+    },
+    {
+      "id": "T3",
+      "title": "Build reusable Arabic RTL cart UI components (AddToCartButton, SiteHeader, CartHeaderLink, CartView)",
+      "acceptance": ["AC-1", "AC-3", "AC-4", "AC-6", "AC-9", "AC-10"],
+      "abuse_cases": ["AB-1", "AB-2", "AB-3", "AB-4", "AB-5", "AB-6", "AB-8", "AB-9", "AB-10", "AB-11", "AB-12", "AB-13"],
+      "allowed_write": [
+        "src/components/add-to-cart-button.tsx",
+        "src/components/cart-header-link.tsx",
+        "src/components/site-header.tsx",
+        "src/components/cart-view.tsx"
+      ],
+      "depends_on": ["T1", "T2"],
+      "status": "pending"
+    },
+    {
+      "id": "T4",
+      "title": "Wire AddToCartButton into ProductCard and ProductDetails",
+      "acceptance": ["AC-1", "AC-2", "AC-9", "AC-10"],
+      "abuse_cases": ["AB-1", "AB-8", "AB-12", "AB-13"],
+      "allowed_write": [
+        "src/components/product-card.tsx",
+        "src/components/product-details.tsx"
+      ],
+      "depends_on": ["T3"],
+      "status": "pending"
+    },
+    {
+      "id": "T5",
+      "title": "Mount CartProvider and SiteHeader in RootLayout and create the independent /cart route",
+      "acceptance": ["AC-1", "AC-6", "AC-7", "AC-9", "AC-10"],
+      "abuse_cases": ["AB-1", "AB-2", "AB-8", "AB-10", "AB-12", "AB-13"],
+      "allowed_write": [
+        "src/app/layout.tsx",
+        "src/app/cart/page.tsx"
+      ],
+      "depends_on": ["T2", "T3", "T4"],
+      "status": "pending"
+    }
+  ]
+}
