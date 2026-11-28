@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { AddToCartButton } from "@/components/add-to-cart-button";
 import { formatPriceIqd, type Product } from "@/lib/products";
 
 export interface ProductDetailsProps {
@@ -45,6 +46,9 @@ export function ProductDetails({ product }: ProductDetailsProps) {
           <p className="text-base leading-relaxed text-neutral-700 dark:text-neutral-300">
             {product.description}
           </p>
+          <div className="pt-2">
+            <AddToCartButton productId={product.id} productName={product.name} />
+          </div>
         </div>
       </article>
     </main>
