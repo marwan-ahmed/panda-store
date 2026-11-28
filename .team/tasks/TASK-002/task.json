@@ -8,11 +8,11 @@
   "base_ref": "main",
   "base_sha": "8ba4d2682f7584eb5c4f56c82244df305b811b45",
   "created_at": "2026-11-27T14:19:17.062Z",
-  "phase": "TESTS",
+  "phase": "GATE_2",
   "interpret_round": 2,
   "fix_cycles": 0,
   "verify_failures": 0,
-  "frozen_sha": "cef11bdf900fe7ed5c968e60001e580606bf9147",
+  "frozen_sha": "4bb7d48a50f8fde7ffb3921a675e3c52c121c880",
   "cr": null,
   "gates": {
     "GATE_0": [
@@ -41,8 +41,14 @@
     ]
   },
   "granted": {},
-  "last_verify": null,
-  "report_hash": null,
+  "last_verify": {
+    "sha": "4bb7d48a50f8fde7ffb3921a675e3c52c121c880",
+    "dirty": false,
+    "result": "pass",
+    "dir": ".team/tasks/TASK-002/evidence/20261128-073631-4bb7d48",
+    "at": "2026-11-28T07:37:38.180Z"
+  },
+  "report_hash": "b4be465f304311ca995142c35ef42b65729197d05e2da8ca0c95738fbfa16601",
   "history": [
     {
       "phase": "INTAKE",
@@ -114,10 +120,38 @@
       "at": "2026-11-28T07:34:35.401Z",
       "from": "DESIGN",
       "cr_classification": "clarification"
+    },
+    {
+      "phase": "IMPLEMENT",
+      "at": "2026-11-28T07:36:20.408Z",
+      "from": "TESTS",
+      "frozen_sha": "4bb7d48a50f8fde7ffb3921a675e3c52c121c880"
+    },
+    {
+      "phase": "REVIEW",
+      "at": "2026-11-28T07:37:53.018Z",
+      "from": "IMPLEMENT",
+      "verified_sha": "4bb7d48a50f8fde7ffb3921a675e3c52c121c880"
+    },
+    {
+      "phase": "REPORT",
+      "at": "2026-11-28T07:46:32.919Z",
+      "from": "REVIEW"
+    },
+    {
+      "phase": "GATE_2",
+      "at": "2026-11-28T07:47:35.587Z",
+      "from": "REPORT",
+      "acceptance_needed": [
+        "REV-01"
+      ]
     }
   ],
   "started": {
     "at": "2026-11-28T07:08:11.085Z",
     "note": "ابدأ التنفيذ"
-  }
+  },
+  "acceptance_needed": [
+    "REV-01"
+  ]
 }
