@@ -1,0 +1,104 @@
+{
+  "id": "TASK-002",
+  "title": "سلة التسوق وحساب المجموع بالدينار العراقي",
+  "kind": "change",
+  "path": "full",
+  "source": null,
+  "branch": "sat/TASK-002",
+  "base_ref": "main",
+  "base_sha": "8ba4d2682f7584eb5c4f56c82244df305b811b45",
+  "created_at": "2026-11-27T14:19:17.062Z",
+  "phase": "TESTS",
+  "interpret_round": 2,
+  "fix_cycles": 0,
+  "verify_failures": 0,
+  "frozen_sha": null,
+  "cr": null,
+  "gates": {
+    "GATE_0": [
+      {
+        "decision": "approve",
+        "note": "اعتمد اقتراحك: Q1 (أ)، Q2 (أ)، وتأكيد A1 وA2",
+        "at": "2026-11-27T14:56:09.877Z",
+        "mode": "agent"
+      }
+    ],
+    "GATE_1": [
+      {
+        "decision": "approve",
+        "note": "اعتمد الخطة",
+        "at": "2026-11-28T07:06:58.624Z",
+        "mode": "agent"
+      }
+    ],
+    "GATE_START": [
+      {
+        "decision": "approve",
+        "note": "ابدأ التنفيذ",
+        "at": "2026-11-28T07:08:11.083Z",
+        "mode": "agent"
+      }
+    ]
+  },
+  "granted": {},
+  "last_verify": null,
+  "report_hash": null,
+  "history": [
+    {
+      "phase": "INTAKE",
+      "at": "2026-11-27T14:19:17.062Z"
+    },
+    {
+      "phase": "INTERPRET",
+      "at": "2026-11-27T14:19:40.724Z",
+      "from": "INTAKE"
+    },
+    {
+      "phase": "GATE_0",
+      "at": "2026-11-27T14:24:00.340Z",
+      "from": "INTERPRET",
+      "blocking_questions": 2,
+      "sensitive_assumptions": 2
+    },
+    {
+      "phase": "INTERPRET",
+      "at": "2026-11-27T14:56:09.890Z",
+      "from": "GATE_0",
+      "gate": "GATE_0",
+      "note": "اعتمد اقتراحك: Q1 (أ)، Q2 (أ)، وتأكيد A1 وA2"
+    },
+    {
+      "phase": "DESIGN",
+      "at": "2026-11-27T14:58:42.387Z",
+      "from": "INTERPRET"
+    },
+    {
+      "phase": "THREAT",
+      "at": "2026-11-27T15:04:33.032Z",
+      "from": "DESIGN"
+    },
+    {
+      "phase": "GATE_1",
+      "at": "2026-11-27T15:08:24.978Z",
+      "from": "THREAT"
+    },
+    {
+      "phase": "GATE_START",
+      "at": "2026-11-28T07:06:58.637Z",
+      "from": "GATE_1",
+      "gate": "GATE_1",
+      "note": "اعتمد الخطة"
+    },
+    {
+      "phase": "TESTS",
+      "at": "2026-11-28T07:08:11.085Z",
+      "from": "GATE_START",
+      "gate": "GATE_START",
+      "note": "ابدأ التنفيذ"
+    }
+  ],
+  "started": {
+    "at": "2026-11-28T07:08:11.085Z",
+    "note": "ابدأ التنفيذ"
+  }
+}

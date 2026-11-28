@@ -23,3 +23,12 @@
 {"ts":"2026-11-26T19:33:52.154Z","type":"phase","task":"TASK-001","from":"REPORT","to":"GATE_2","acceptance_needed":["REV-01"]}
 {"ts":"2026-11-27T13:29:27.942Z","type":"risk_accepted","task":"TASK-001","ids":["REV-01"],"note":"اعتمد النتيجة"}
 {"ts":"2026-11-27T14:19:16.545Z","type":"phase","task":"TASK-001","from":"GATE_2","to":"CLOSED","via":"merge"}
+{"ts":"2026-11-27T14:19:17.063Z","type":"task_created","task":"TASK-002","title":"سلة التسوق وحساب المجموع بالدينار العراقي","kind":"change","path":"full","branch":"sat/TASK-002","base_ref":"main","base_sha":"8ba4d2682f7584eb5c4f56c82244df305b811b45"}
+{"ts":"2026-11-27T14:19:40.727Z","type":"phase","task":"TASK-002","from":"INTAKE","to":"INTERPRET"}
+{"ts":"2026-11-27T14:24:00.355Z","type":"phase","task":"TASK-002","from":"INTERPRET","to":"GATE_0","blocking_questions":2,"sensitive_assumptions":2}
+{"ts":"2026-11-27T14:56:09.892Z","type":"phase","task":"TASK-002","from":"GATE_0","to":"INTERPRET","gate":"GATE_0","note":"اعتمد اقتراحك: Q1 (أ)، Q2 (أ)، وتأكيد A1 وA2"}
+{"ts":"2026-11-27T14:58:42.390Z","type":"phase","task":"TASK-002","from":"INTERPRET","to":"DESIGN"}
+{"ts":"2026-11-27T15:04:33.036Z","type":"phase","task":"TASK-002","from":"DESIGN","to":"THREAT"}
+{"ts":"2026-11-27T15:08:24.984Z","type":"phase","task":"TASK-002","from":"THREAT","to":"GATE_1"}
+{"ts":"2026-11-28T07:06:58.639Z","type":"phase","task":"TASK-002","from":"GATE_1","to":"GATE_START","gate":"GATE_1","note":"اعتمد الخطة"}
+{"ts":"2026-11-28T07:08:11.089Z","type":"phase","task":"TASK-002","from":"GATE_START","to":"TESTS","gate":"GATE_START","note":"ابدأ التنفيذ"}

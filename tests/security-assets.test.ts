@@ -24,7 +24,7 @@ async function loadProxyModule() {
 }
 
 describe("فحوصات الأمن والحدود والأصول والتكوين", () => {
-  it("AB-2: يخلو التطبيق تماماً من Server Actions وواجهات API ومسارات أو أزرار السلة والدفع والإدارة", async () => {
+  it("AB-2: يخلو التطبيق تماماً من Server Actions وواجهات API وبوابات الدفع وإتمام الطلب", async () => {
     const srcFiles = collectFiles(path.join(ROOT_DIR, "src"));
     expect(srcFiles.some((f) => /[\\/]api[\\/].*route\.(ts|tsx|js|jsx)$/.test(f))).toBe(false);
 
