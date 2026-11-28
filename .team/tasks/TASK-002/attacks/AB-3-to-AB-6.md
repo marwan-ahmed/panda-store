@@ -2,7 +2,7 @@
 
 - **Axis:** `business_logic` (OWASP A06:2025, ASVS 5.0 V2/V5)
 - **Target:** `src/lib/cart.ts`, `src/lib/cart-storage.ts`, `src/lib/products.ts`, `http://127.0.0.1:3000`
-- **Evidence source:** `.team/tasks/TASK-002/attacks/probe-results.json` (`ab3_to_ab11_domain_storage`), `.team/tasks/TASK-002/evidence/20261128-073631-4bb7d48/test.log`
+- **Evidence source:** `.team/tasks/TASK-002/attacks/probe-results.json` (`ab3_to_ab11_domain_storage`), `.team/tasks/TASK-002/evidence/20261128-081323-922ae39/test.log`
 
 ## Observed Verification Results
 

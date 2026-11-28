@@ -2,7 +2,7 @@
 
 - **Axis:** `authentication` (OWASP A07:2025, ASVS 5.0 V7)
 - **Target:** `http://127.0.0.1:3000` + `src/` static check + `tests/cart-storage.test.ts#AB-2`
-- **Evidence source:** `.team/tasks/TASK-002/attacks/probe-results.json` (`ab2_authentication`), `.team/tasks/TASK-002/evidence/20261128-073631-4bb7d48/test.log`
+- **Evidence source:** `.team/tasks/TASK-002/attacks/probe-results.json` (`ab2_authentication`), `.team/tasks/TASK-002/evidence/20261128-081323-922ae39/test.log`
 
 ## Observed Requests & Checks
 

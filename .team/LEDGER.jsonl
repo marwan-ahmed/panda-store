@@ -41,3 +41,11 @@
 {"ts":"2026-11-28T07:46:32.923Z","type":"phase","task":"TASK-002","from":"REVIEW","to":"REPORT"}
 {"ts":"2026-11-28T07:46:49.342Z","type":"report","task":"TASK-002","sha":"4bb7d48a50f8fde7ffb3921a675e3c52c121c880"}
 {"ts":"2026-11-28T07:47:35.589Z","type":"phase","task":"TASK-002","from":"REPORT","to":"GATE_2","acceptance_needed":["REV-01"]}
+{"ts":"2026-11-28T08:09:19.543Z","type":"phase","task":"TASK-002","from":"GATE_2","to":"FIX","gate":"GATE_2","note":"عدّل: رسالة تنبيه أو رقم غير مكتمل ظاهرَين للزائر عند عودته إلى صفحة السلة بعد التنقل إلى صفحة أخرى"}
+{"ts":"2026-11-28T08:14:32.118Z","type":"verify","task":"TASK-002","phase":"FIX","sha":"922ae3907bc23544e1efb8020c769f8a3d26dc75","result":"fail","dir":".team/tasks/TASK-002/evidence/20261128-081323-922ae39"}
+{"ts":"2026-11-28T08:15:39.688Z","type":"phase","task":"TASK-002","from":"FIX","to":"ESCALATED","reason":"check:tests_frozen flagged reviewer artifact .team/tasks/TASK-002/review/repro.test.tsx (matches **/*.test.*); owned by REVIEW phase, not writable in FIX"}
+{"ts":"2026-11-28T08:17:12.127Z","type":"phase","task":"TASK-002","from":"ESCALATED","to":"REVIEW","note":"الخيار 1","resumed_from":"FIX"}
+{"ts":"2026-11-28T08:37:34.814Z","type":"verify","task":"TASK-002","phase":"REVIEW","sha":"922ae3907bc23544e1efb8020c769f8a3d26dc75","result":"pass","dir":".team/tasks/TASK-002/evidence/20261128-083632-922ae39"}
+{"ts":"2026-11-28T08:37:50.648Z","type":"phase","task":"TASK-002","from":"REVIEW","to":"REPORT"}
+{"ts":"2026-11-28T08:37:51.542Z","type":"report","task":"TASK-002","sha":"922ae3907bc23544e1efb8020c769f8a3d26dc75"}
+{"ts":"2026-11-28T08:38:39.419Z","type":"phase","task":"TASK-002","from":"REPORT","to":"GATE_2"}

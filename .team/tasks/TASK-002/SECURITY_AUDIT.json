@@ -2,37 +2,37 @@
   "task_id": "TASK-002",
   "profile": "web",
   "verdict": "CLEAR_WITHIN_SCOPE",
-  "summary": "تم تدقيق تعديلات TASK-002 ساكناً واختبار التطبيق المبني ديناميكياً على http://127.0.0.1:3000 (مع اختبار وحدات منطق السلة والتخزين المحلي مباشرةً) عبر حالات الإساءة AB-1 إلى AB-13: حدود المسارات ورمز 404 على /products/cart، غياب Server Actions وAPI وSet-Cookie، عدم انعكاس مدخلات الاستعلام وRSC في /cart، تزامن حالة السلة الفارغة أثناء التصيير الأولي مع cacheComponents، ثبات المجاميع والكميات ضد التلاعب والمدخلات المشوّهة، ومراجعة حزم العميل العشر. لم يُثبت وجود أي ثغرة خطير جداً (Critical) أو خطير (High) أو متوسط (Medium) ضمن النطاق المختبر، وسُجّلت ملاحظتان بسيطتان (Low) غير مانعتين؛ كما أن أداتي gitleaks وsemgrep غير مثبتتين محلياً فتمت تغطيتهما بمراجعة يدوية للكود والحزم المبنية بجانب نجاح npm audit بلا ثغرات.",
+  "summary": "أُعيد تدقيق تعديلات TASK-002 بعد نقطة الحفظ 922ae3907bc23544e1efb8020c769f8a3d26dc75 (تعديل src/components/cart-view.tsx لتصفير حالة الإدخال والتنبيه المؤقتة عند إخفاء React Activity)، مع اختبار النسخة المبنية حديثاً على http://127.0.0.1:3000 وفحص تفاعل CartView تحت Activity وتدقيق دوال السلة والتخزين المحلي وحزم العميل الثلاث المجمّعة. أظهرت النتائج ثبات حدود المسارات ورمز 404 على /products/cart، وغياب Server Actions وAPI وSet-Cookie، وعدم انعكاس مدخلات الاستعلام وRSC، وحتمية التصيير الأولي الفارغ مع cacheComponents، وتطابق حالة CartView بعد الإخفاء والإظهار دون بقاء مدخلات مشوّهة أو تنبيهات قديمة. لم يُثبت وجود أي ثغرة خطير جداً (Critical) أو خطير (High) أو متوسط (Medium) ضمن النطاق المختبر، وتبقى الملاحظتان البسيطتان (Low) السابقتان SEC-01 وSEC-02 غير مانعتين؛ كما أن أداتي gitleaks وsemgrep غير مثبتتين محلياً فتمت تغطيتهما بمراجعة يدوية للكود والحزم المبنية بجانب نجاح npm audit بلا ثغرات.",
   "environment": {
     "target": "http://127.0.0.1:3000",
     "attack_env": "none",
-    "head_sha": "4bb7d48a50f8fde7ffb3921a675e3c52c121c880"
+    "head_sha": "922ae3907bc23544e1efb8020c769f8a3d26dc75"
   },
-  "scanners_source": ".team/tasks/TASK-002/evidence/20261128-073631-4bb7d48/summary.json",
+  "scanners_source": ".team/tasks/TASK-002/evidence/20261128-081323-922ae39/summary.json",
   "coverage": [
     {
       "axis": "access_control",
       "status": "TESTED_DYNAMIC",
       "abuse_cases": ["AB-1"],
-      "reason": "اختُبرت مسارات / و/products/1..10 و/cart (200) و/products/cart و/products/99 و/cart/checkout و/api/cart (404) وطلبات POST/PUT/DELETE/PATCH/OPTIONS على /cart (405) وطلبات POST مع ترويسة Next-Action (400) ديناميكياً على الخادم المحلي، مع فحص خلو الكود وserver-reference-manifest من أي API أو Server Actions أو نماذج دفع؛ لا توجد أدوار أو مستأجرون في هذا النطاق العام."
+      "reason": "اختُبرت مسارات / و/products/1..10 و/cart (200) و/products/cart و/products/99 و/cart/checkout و/api/cart (404) وطلبات POST/PUT/DELETE/PATCH/OPTIONS على /cart (405) وطلبات POST مع ترويسة Next-Action (400) ديناميكياً على النسخة المبنية من 922ae39، مع فحص خلو الكود وserver-reference-manifest من أي API أو Server Actions أو نماذج دفع؛ لا توجد أدوار أو مستأجرون في هذا النطاق العام."
     },
     {
       "axis": "authentication",
       "status": "TESTED_DYNAMIC",
       "abuse_cases": ["AB-2"],
-      "reason": "تم التحقق ديناميكياً من غياب Set-Cookie عبر جميع الاستجابات وإرجاع 404 لمسارات /login و/signup و/account و/api/auth/session وتطابق استجابة /cart مع ترويسات Cookie/Authorization/X-User-Role المزورة، وبالمراجعة الساكنة واختبارات التخزين لغياب cookies() وتجريد حقول الجلسات المزروعة."
+      "reason": "تم التحقق ديناميكياً على الخادم المبني من غياب Set-Cookie عبر جميع الاستجابات وإرجاع 404 لمسارات /login و/signup و/account و/api/auth/session وتطابق استجابة /cart مع ترويسات Cookie/Authorization/X-User-Role المزورة، وبالمراجعة الساكنة واختبارات التخزين لغياب cookies() وتجريد حقول الجلسات المزروعة."
     },
     {
       "axis": "injection",
       "status": "TESTED_DYNAMIC",
       "abuse_cases": ["AB-7", "AB-8"],
-      "reason": "اختُبرت ديناميكياً استعلامات /cart?msg= بالترميز الخام والمشفّر وترويسة RSC وحمولات __proto__ دون أي انعكاس في HTML أو text/x-component، واختُبرت مفاتيح Object.prototype وإسقاط حمولات XSS من localStorage مع فحص غياب dangerouslySetInnerHTML وinnerHTML وeval في الكود وحزم العميل."
+      "reason": "اختُبرت ديناميكياً استعلامات /cart?msg= بالترميز الخام والمشفّر وترويسة RSC وحمولات __proto__ دون أي انعكاس في HTML أو text/x-component، واختُبرت مفاتيح Object.prototype وإسقاط حمولات XSS من localStorage وحقل الكمية في CartView (بما في ذلك تنظيف المسودة عبر Activity) مع فحص غياب dangerouslySetInnerHTML وinnerHTML وeval في الكود وحزم العميل (ومنها الحزمة المحدثة 3jdrrxqpef3ut.js)."
     },
     {
       "axis": "business_logic",
       "status": "TESTED_DYNAMIC",
       "abuse_cases": ["AB-3", "AB-4", "AB-5", "AB-6"],
-      "reason": "اختُبرت دوال النطاق والتخزين وصفحات المتجر الحية للتحقق من تجاهل الأسعار المزورة في localStorage واعتماد PRODUCTS حصراً، ودمج التكرار وتقييد الكمية ضمن 1..99، ورفض الكسور والسلاسل المخادعة دون تقريب، وصحة إجمالي السلة حتى 19,899,000 د.ع، مع رصد حالة حدية بسيطة لـ -0 في formatCartTotalIqd (SEC-02)."
+      "reason": "اختُبرت دوال النطاق والتخزين وتفاعل CartView وصفحات المتجر الحية للتحقق من تجاهل الأسعار المزورة في localStorage واعتماد PRODUCTS حصراً، ودمج التكرار وتقييد الكمية ضمن 1..99، وتصفير المسودات والتنبيهات في CartView عند إخفاء Activity حتى لا تبقى قيم أو تنبيهات غير متزامنة، ورفض الكسور والسلاسل المخادعة دون تقريب، وصحة إجمالي السلة حتى 19,899,000 د.ع، مع بقاء الحالة الحدية البسيطة لـ -0 في formatCartTotalIqd (SEC-02)."
     },
     {
       "axis": "mass_assignment_data_exposure",
@@ -44,13 +44,13 @@
       "axis": "resource_abuse_uploads",
       "status": "TESTED_DYNAMIC",
       "abuse_cases": ["AB-11"],
-      "reason": "اختُبرت دفعة 30 طلباً متزامناً على /cart و/products/cart (75 مللي ثانية، 15x 200 و15x 404)، ورفض حمولة localStorage بحجم 70000 محرف خلال 0 مللي ثانية، وتقييد المسح عند 200 عنصر؛ ولا توجد أي نقاط رفع ملفات في التطبيق."
+      "reason": "اختُبرت دفعة 30 طلباً متزامناً على /cart و/products/cart (109 مللي ثانية، 15x 200 و15x 404)، ورفض حمولة localStorage بحجم 70000 محرف خلال 0 مللي ثانية، وتقييد المسح عند 200 عنصر؛ ولا توجد أي نقاط رفع ملفات في التطبيق."
     },
     {
       "axis": "configuration_secrets_supply_chain",
       "status": "TESTED_DYNAMIC",
       "abuse_cases": ["AB-12", "AB-13"],
-      "reason": "اختُبر التصيير الحتمي للسلة الفارغة أثناء SSR/RSC، وحقن ترويسات Host/X-Forwarded-Host/Origin على /cart و/cart/، وفحص الترويسات الأمنية الغائبة الموروثة من next.config.ts (SEC-01)، ومراجعة جميع حزم .next/static/chunks/*.js العشر وpackage.json ونتيجة npm audit (0 vulnerabilities في dependencies.log؛ بينما gitleaks وsemgrep غير مثبتتين)."
+      "reason": "اختُبر التصيير الحتمي للسلة الفارغة أثناء SSR/RSC على البناء المحدّث، وسلوك CartView عبر إخفاء وإظهار React Activity (useLayoutEffect cleanup)، وحقن ترويسات Host/X-Forwarded-Host/Origin على /cart و/cart/، وفحص الترويسات الأمنية الغائبة الموروثة من next.config.ts (SEC-01)، ومراجعة جميع حزم .next/static/chunks/*.js العشر وpackage.json ونتيجة npm audit (0 vulnerabilities في dependencies.log؛ بينما gitleaks وsemgrep غير مثبتتين)."
     }
   ],
   "scanner_triage": [],

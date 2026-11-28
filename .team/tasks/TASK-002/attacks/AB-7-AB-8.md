@@ -2,7 +2,7 @@
 
 - **Axis:** `injection` (OWASP A05:2025, ASVS 5.0 V1/V2/V5)
 - **Target:** `http://127.0.0.1:3000`, `src/lib/cart.ts`, `src/lib/cart-storage.ts`, `.next/static/chunks/*.js`
-- **Evidence source:** `.team/tasks/TASK-002/attacks/probe-results.json` (`ab3_to_ab11_domain_storage`, `ab8_ab12_xss_rsc_hydration`)
+- **Evidence source:** `.team/tasks/TASK-002/attacks/probe-results.json` (`ab3_to_ab11_domain_storage`, `ab8_ab12_xss_rsc_hydration`), `.team/tasks/TASK-002/attacks/cart-activity-probe.json`
 
 ## Observed Requests & Checks
 
@@ -19,7 +19,8 @@
 
 3. **AB-8 (Storage XSS stripping & compiled client chunks):**
    - `parseStoredCart` with `name: "<script>alert(1)</script>"`, `imageSrc: "javascript:alert(1)"`, and `productId: "<img src=x onerror=alert(1)>"` returned strictly `[{ productId: "1", quantity: 1 }]`, `needsRepair: true`.
-   - Compiled app chunks (`089wym5cx7080.js`, `0vjngty2s01kj.js`, `11wv4hh9_m4t_.js`) contain zero `dangerouslySetInnerHTML`, zero `.innerHTML`, and zero `eval(`.
+   - Compiled app chunks (`089wym5cx7080.js`, `0vjngty2s01kj.js`, `3jdrrxqpef3ut.js`) contain zero `dangerouslySetInnerHTML`, zero `.innerHTML`, and zero `eval(`.
+   - Interactive `CartView` probe (`cart-activity-probe.json`) injecting `<script>alert(1)</script>` into the quantity input rejected the payload with Arabic alert (`"يرجى إدخال كمية صحيحة بين 1 و99."`), kept `htmlContainsRawScript: false` and `cartTextStillShows30k: true`, and cleared the transient draft/alert cleanly across React `<Activity>` hide/show.
 
 ## Conclusion
 Prototype keys, query-parameter script strings, and stored HTML/script/URI payloads are rejected or stripped without reflection or DOM injection sinks.

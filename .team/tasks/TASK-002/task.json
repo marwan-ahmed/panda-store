@@ -11,7 +11,7 @@
   "phase": "GATE_2",
   "interpret_round": 2,
   "fix_cycles": 0,
-  "verify_failures": 0,
+  "verify_failures": 1,
   "frozen_sha": "4bb7d48a50f8fde7ffb3921a675e3c52c121c880",
   "cr": null,
   "gates": {
@@ -38,17 +38,25 @@
         "at": "2026-11-28T07:08:11.083Z",
         "mode": "agent"
       }
+    ],
+    "GATE_2": [
+      {
+        "decision": "changes",
+        "note": "عدّل: رسالة تنبيه أو رقم غير مكتمل ظاهرَين للزائر عند عودته إلى صفحة السلة بعد التنقل إلى صفحة أخرى",
+        "at": "2026-11-28T08:09:19.540Z",
+        "mode": "agent"
+      }
     ]
   },
   "granted": {},
   "last_verify": {
-    "sha": "4bb7d48a50f8fde7ffb3921a675e3c52c121c880",
-    "dirty": false,
+    "sha": "922ae3907bc23544e1efb8020c769f8a3d26dc75",
+    "dirty": true,
     "result": "pass",
-    "dir": ".team/tasks/TASK-002/evidence/20261128-073631-4bb7d48",
-    "at": "2026-11-28T07:37:38.180Z"
+    "dir": ".team/tasks/TASK-002/evidence/20261128-083632-922ae39",
+    "at": "2026-11-28T08:37:34.813Z"
   },
-  "report_hash": "b4be465f304311ca995142c35ef42b65729197d05e2da8ca0c95738fbfa16601",
+  "report_hash": "5c67bd8e0ca855efa0ec70002c0b0c8d6725bd217f977a9f5151292b667c40c8",
   "history": [
     {
       "phase": "INTAKE",
@@ -145,13 +153,42 @@
       "acceptance_needed": [
         "REV-01"
       ]
+    },
+    {
+      "phase": "FIX",
+      "at": "2026-11-28T08:09:19.541Z",
+      "from": "GATE_2",
+      "gate": "GATE_2",
+      "note": "عدّل: رسالة تنبيه أو رقم غير مكتمل ظاهرَين للزائر عند عودته إلى صفحة السلة بعد التنقل إلى صفحة أخرى"
+    },
+    {
+      "phase": "ESCALATED",
+      "at": "2026-11-28T08:15:39.685Z",
+      "from": "FIX",
+      "reason": "check:tests_frozen flagged reviewer artifact .team/tasks/TASK-002/review/repro.test.tsx (matches **/*.test.*); owned by REVIEW phase, not writable in FIX"
+    },
+    {
+      "phase": "REVIEW",
+      "at": "2026-11-28T08:17:12.124Z",
+      "from": "ESCALATED",
+      "note": "الخيار 1",
+      "resumed_from": "FIX"
+    },
+    {
+      "phase": "REPORT",
+      "at": "2026-11-28T08:37:50.645Z",
+      "from": "REVIEW"
+    },
+    {
+      "phase": "GATE_2",
+      "at": "2026-11-28T08:38:39.417Z",
+      "from": "REPORT"
     }
   ],
   "started": {
     "at": "2026-11-28T07:08:11.085Z",
     "note": "ابدأ التنفيذ"
   },
-  "acceptance_needed": [
-    "REV-01"
-  ]
+  "acceptance_needed": [],
+  "escalated_from": "FIX"
 }

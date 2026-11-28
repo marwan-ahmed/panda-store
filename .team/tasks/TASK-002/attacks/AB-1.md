@@ -1,7 +1,7 @@
 # AB-1 — Access Control: Route Boundaries, `404` Guards & Absence of Server Mutations
 
 - **Axis:** `access_control` (OWASP A01:2025, ASVS 5.0 V4)
-- **Target:** `http://127.0.0.1:3000` (`npm run start` built from `4bb7d48a50f8fde7ffb3921a675e3c52c121c880`)
+- **Target:** `http://127.0.0.1:3000` (`npm run start` built from `922ae3907bc23544e1efb8020c769f8a3d26dc75`)
 - **Evidence source:** `.team/tasks/TASK-002/attacks/probe-results.json` (`ab1_access_control`), `.next/server/app/cart/page/server-reference-manifest.json`
 
 ## Observed Requests & Responses

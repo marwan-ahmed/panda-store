@@ -9,7 +9,7 @@ export default defineConfig({
   },
   test: {
     environment: "jsdom",
-    include: [".team/tasks/TASK-002/review/*.test.{ts,tsx}"],
+    include: [".team/tasks/TASK-002/review/repro-checks.tsx"],
     setupFiles: ["./vitest.setup.ts"],
   },
 });

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-11-28T07:43:29.990Z",
+  "timestamp": "2026-11-28T08:19:46.717Z",
   "target": "http://127.0.0.1:3000",
   "ab1_access_control": {
     "home": {
@@ -1065,7 +1065,7 @@
   },
   "ab11_burst": {
     "totalRequests": 30,
-    "durationMs": 75,
+    "durationMs": 109,
     "cartStatuses": [
       200,
       200,
@@ -1257,16 +1257,6 @@
         "hasEval": false
       },
       {
-        "file": "11wv4hh9_m4t_.js",
-        "bytes": 22069,
-        "isAppCartChunk": true,
-        "secretsMatched": [],
-        "localPathOrPiiMatched": [],
-        "hasDangerouslySetInnerHTML": false,
-        "hasInnerHTML": false,
-        "hasEval": false
-      },
-      {
         "file": "1pcw6gskne7pf.js",
         "bytes": 5600,
         "isAppCartChunk": false,
@@ -1297,6 +1287,16 @@
         "hasEval": false
       },
       {
+        "file": "3jdrrxqpef3ut.js",
+        "bytes": 22119,
+        "isAppCartChunk": true,
+        "secretsMatched": [],
+        "localPathOrPiiMatched": [],
+        "hasDangerouslySetInnerHTML": false,
+        "hasInnerHTML": false,
+        "hasEval": false
+      },
+      {
         "file": "3mwm0pfu8c8me.js",
         "bytes": 29913,
         "isAppCartChunk": false,
@@ -1319,7 +1319,7 @@
     ]
   },
   "server_logs": {
-    "stdout": "▲ Next.js 16.4.6\n- Local:         http://127.0.0.1:3000\n- Network:       http://127.0.0.1:3000\n✓ Ready in 498ms\n✓ Running next.config.ts took 92ms",
+    "stdout": "▲ Next.js 16.4.6\n- Local:         http://127.0.0.1:3000\n- Network:       http://127.0.0.1:3000\n✓ Ready in 578ms\n✓ Running next.config.ts took 74ms",
     "stderr": "Error: The Server Reference ID did not match the expected format. Received \"deadbeef0123456789\".\nRead more: https://nextjs.org/docs/messages/failed-to-find-server-action\n    at async m (D:\\ajeeb-app\\panda-store\\.next\\server\\chunks\\ssr\\[root-of-the-server]__03s38g7fsdgmc._.js:1:12027)\n    at async n (D:\\ajeeb-app\\panda-store\\.next\\server\\chunks\\ssr\\[root-of-the-server]__03s38g7fsdgmc._.js:2:4601)\n    at async t (D:\\ajeeb-app\\panda-store\\.next\\server\\chunks\\ssr\\[root-of-the-server]__03s38g7fsdgmc._.js:2:6022)\n    at async $ (D:\\ajeeb-app\\panda-store\\.next\\server\\chunks\\ssr\\[root-of-the-server]__03s38g7fsdgmc._.js:4:1526)\nError: The Server Reference ID did not match the expected format. Received \"deadbeef0123456789\".\nRead more: https://nextjs.org/docs/messages/failed-to-find-server-action\n    at async m (D:\\ajeeb-app\\panda-store\\.next\\server\\chunks\\ssr\\[root-of-the-server]__03s38g7fsdgmc._.js:1:12027)\n    at async n (D:\\ajeeb-app\\panda-store\\.next\\server\\chunks\\ssr\\[root-of-the-server]__03s38g7fsdgmc._.js:2:4601)\n    at async t (D:\\ajeeb-app\\panda-store\\.next\\server\\chunks\\ssr\\[root-of-the-server]__03s38g7fsdgmc._.js:2:6022)\n    at async $ (D:\\ajeeb-app\\panda-store\\.next\\server\\chunks\\ssr\\[root-of-the-server]__03s38g7fsdgmc._.js:4:1526)"
   }
 }

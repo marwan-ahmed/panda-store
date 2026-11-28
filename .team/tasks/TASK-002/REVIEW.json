@@ -1,7 +1,7 @@
 {
   "task_id": "TASK-002",
   "base_sha": "8ba4d2682f7584eb5c4f56c82244df305b811b45",
-  "head_sha": "4bb7d48a50f8fde7ffb3921a675e3c52c121c880",
+  "head_sha": "922ae3907bc23544e1efb8020c769f8a3d26dc75",
   "verdict": "CLEAR_WITHIN_SCOPE",
   "test_integrity": {
     "frozen_sha": "4bb7d48a50f8fde7ffb3921a675e3c52c121c880",
@@ -10,25 +10,13 @@
   },
   "findings": [
     {
-      "id": "REV-01",
-      "lens": "logic",
-      "severity": "medium",
-      "proof": "confirmed",
-      "location": "src/components/cart-view.tsx#CartView",
-      "scenario": "عند تفعيل cacheComponents في Next.js 16، يبقي الغلاف <Activity mode=\"hidden\"> حالة React المحلية للمسار /cart عند التنقل منه إلى صفحة أخرى ثم العودة إليه، مع تشغيل تنظيف useLayoutEffect فقط. وبما أن CartView لا ينفذ تنظيف useLayoutEffect لحالتي alertMessage وdraftQuantities (بخلاف AddToCartButton)، فإن إدخال قيمة غير صالحة مثل \"abc\" أو بلوغ الحد الأقصى 99 وظهور التنبيه ثم إخفاء المكوّن عبر <Activity mode=\"hidden\"> وإظهاره مجدداً بـ <Activity mode=\"visible\"> يُبقي رسالة التنبيه (role=\"alert\") والمسودة \"abc\" ظاهرتين في الواجهة.",
-      "evidence": "اختبار REV-01 في .team/tasks/TASK-002/review/repro.test.tsx ومخرجات تشغيله في .team/tasks/TASK-002/review/repro-output.txt (VITEST_EXIT=0) يثبتان بقاء عنصر role=\"alert\" وقيمة الإدخال \"abc\" بعد دورة <Activity mode=\"hidden\"> ثم <Activity mode=\"visible\">.",
-      "fix": "إضافة useLayoutEffect مع دالة تنظيف في src/components/cart-view.tsx#CartView لإعادة ضبط alertMessage إلى null وdraftQuantities إلى {} عند الإخفاء أو التفكيك، مع الاعتماد على بيئة React 19.3.0 وNext.js 16.4.6 المفعّل فيها cacheComponents: true.",
-      "plain": "قد تبقى رسالة تنبيه أو رقم غير مكتمل ظاهرَين للزائر عند عودته إلى صفحة السلة بعد التنقل إلى صفحة أخرى.",
-      "trace": ["EC-6", "AB-12"]
-    },
-    {
       "id": "REV-02",
       "lens": "money",
       "severity": "low",
       "proof": "confirmed",
       "location": "src/lib/cart.ts#formatCartTotalIqd",
       "scenario": "تتحقق formatCartTotalIqd من typeof totalIqd === \"number\" وNumber.isSafeInteger(totalIqd) وtotalIqd >= 0، لكن الصفر السالب (-0) في JavaScript يجتاز هذه الشروط (Number.isSafeInteger(-0) === true و -0 < 0 === false)، فيمر إلى Intl.NumberFormat(\"en-US\", { maximumFractionDigits: 0 }).format(-0) وينتج النص \"-0 د.ع\" بدلاً من \"0 د.ع\" أو رفضه. هذه الحالة غير قابلة للوصول من buildCart أو localStorage أو واجهة السلة لأن المجاميع تبدأ من +0 وتجمع قيماً موجبة فقط، وتحدث فقط عند استدعاء formatCartTotalIqd(-0) برمجياً.",
-      "evidence": "اختبار REV-02 في .team/tasks/TASK-002/review/repro.test.tsx ومخرجاته في .team/tasks/TASK-002/review/repro-output.txt (VITEST_EXIT=0) يثبت أن formatCartTotalIqd(-0) تُرجع \"-0 د.ع\".",
+      "evidence": "حالة REV-02 في .team/tasks/TASK-002/review/repro-checks.tsx ومخرجات تشغيلها عند Commit 922ae39 في .team/tasks/TASK-002/review/repro-output.txt (VITEST_EXIT=0) تثبت أن formatCartTotalIqd(-0) تُرجع \"-0 د.ع\".",
       "fix": "تطبيع الصفر السالب قبل التنسيق (const normalized = totalIqd === 0 ? 0 : totalIqd) أو رفض Object.is(totalIqd, -0) في src/lib/cart.ts#formatCartTotalIqd، وذلك في بيئة Node.js >=22.12.0 / ICU الحالية.",
       "plain": "قد يظهر مبلغ السلة بصيغة صفر سالب في حالة برمجية داخلية غير مستخدمة من الواجهة.",
       "trace": ["AC-5", "EC-4", "R6"]
@@ -40,7 +28,7 @@
       "proof": "confirmed",
       "location": "src/lib/cart.ts#sanitizeCartItems",
       "scenario": "تقرأ sanitizeCartItems الخاصية record.quantity مرتين (الأولى في isValidQuantityNumber(record.quantity) والثانية في currentQty + record.quantity). عند تمرير كائن JavaScript يحمل getter متغيّراً يعيد 1 في القراءة الأولى و-50 في القراءة الثانية، ينجح التحقق الأول ثم تُحسب الكمية -50 وتُحفظ في CartItem، وعند تمرير المصفوفة نفسها إلى buildCart ينتج cartTotalIqd = -750000. هذه الحالة غير قابلة للوصول من JSON.parse(localStorage) أو مدخلات DOM وتنحصر بالاستدعاء البرمجي المباشر بكائن غير عادي.",
-      "evidence": "اختبار REV-03 في .team/tasks/TASK-002/review/repro.test.tsx ومخرجاته في .team/tasks/TASK-002/review/repro-output.txt (VITEST_EXIT=0) يثبت أن sanitizeCartItems ترجع [{ productId: \"1\", quantity: -50 }] وأن buildCart تنتج cartTotalIqd === -750000.",
+      "evidence": "حالة REV-03 في .team/tasks/TASK-002/review/repro-checks.tsx ومخرجات تشغيلها عند Commit 922ae39 في .team/tasks/TASK-002/review/repro-output.txt (VITEST_EXIT=0) تثبت أن sanitizeCartItems ترجع [{ productId: \"1\", quantity: -50 }] وأن buildCart تنتج cartTotalIqd === -750000.",
       "fix": "قراءة record.productId وrecord.quantity مرة واحدة في متغيرين محليين قبل الفحص والجمع في src/lib/cart.ts#sanitizeCartItems، وذلك في بيئة TypeScript/Node.js الحالية.",
       "plain": "قد تقبل دالة تجهيز السلة كمية سالبة عند استدعائها مباشرةً بكائن برمجي مخادع لا يمكن وروده من المتصفح.",
       "trace": ["AC-8", "AB-5", "R3", "R4"]
