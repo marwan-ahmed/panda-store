@@ -349,7 +349,7 @@ describe("واجهة السلة والصفحات والضوابط الأمنية
     );
     expect(secondMount.getByRole("link", { name: /السلة/ }).textContent).toContain("2");
     expect(secondMount.getByText("كوب باندا خزفي")).toBeInTheDocument();
-    expect(secondMount.getByText("30,000 د.ع")).toBeInTheDocument();
+    expect(secondMount.getAllByText("30,000 د.ع").length).toBeGreaterThanOrEqual(2);
 
     window.localStorage.setItem(
       CART_KEY,
@@ -524,7 +524,7 @@ describe("واجهة السلة والصفحات والضوابط الأمنية
     const qtyInput = view.getByLabelText(/كمية/);
     fireEvent.change(qtyInput, { target: { value: "<script>alert(1)</script>" } });
     expect(view.container.innerHTML).not.toContain("<script>alert(1)</script>");
-    expect(view.getByText("15,000 د.ع")).toBeInTheDocument();
+    expect(view.getAllByText("15,000 د.ع").length).toBeGreaterThanOrEqual(3);
     expect(typeof CartView).toBe("function");
 
     for (const rel of [

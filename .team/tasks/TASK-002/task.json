@@ -12,7 +12,7 @@
   "interpret_round": 2,
   "fix_cycles": 0,
   "verify_failures": 0,
-  "frozen_sha": null,
+  "frozen_sha": "cef11bdf900fe7ed5c968e60001e580606bf9147",
   "cr": null,
   "gates": {
     "GATE_0": [
@@ -95,6 +95,25 @@
       "from": "GATE_START",
       "gate": "GATE_START",
       "note": "ابدأ التنفيذ"
+    },
+    {
+      "phase": "IMPLEMENT",
+      "at": "2026-11-28T07:15:47.870Z",
+      "from": "TESTS",
+      "frozen_sha": "cef11bdf900fe7ed5c968e60001e580606bf9147"
+    },
+    {
+      "phase": "DESIGN",
+      "at": "2026-11-28T07:32:18.425Z",
+      "from": "IMPLEMENT",
+      "reason": "CHANGE_REQUEST-1",
+      "change_request": "CHANGE_REQUEST-1.md"
+    },
+    {
+      "phase": "TESTS",
+      "at": "2026-11-28T07:34:35.401Z",
+      "from": "DESIGN",
+      "cr_classification": "clarification"
     }
   ],
   "started": {
